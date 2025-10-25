@@ -1,7 +1,20 @@
 {
-  "ignore": ["auth_info_baileys", "session_backup.json", "temp"],
-  "watch": ["."],
+  "watch": [
+    "tenebri.js",
+    "lib",
+    "plugins",
+    "command.js",
+    "config.js"
+  ],
+  "ignore": [
+    "auth_info_baileys/*",
+    "node_modules/*",
+    "temp/*",
+    "logs/*",
+    ".git/*",
+    "*.log"
+  ],
   "ext": "js,json",
   "exec": "node tenebri.js",
-  "legacyWatch": true
+  "delay": "500"
 }
