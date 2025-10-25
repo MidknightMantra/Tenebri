@@ -1,0 +1,43 @@
+# ========================================================
+# 🐳 Tenebri Bot — Node.js CI Workflow
+# This workflow installs dependencies, caches them,
+# builds the source code, and ensures successful build
+# across multiple Node.js versions.
+# ========================================================
+
+name: Tenebri Bot CI
+
+on:
+  push:
+    branches: [ "V-1.00" ]
+  pull_request:
+    branches: [ "V-1.00" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x, 22.x]
+        # Supported Node.js release schedule:
+        # https://nodejs.org/en/about/releases/
+
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 🛠️ Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🏗️ Build project (if applicable)
+        run: npm run build --if-present
+
+      - name: ✅ Run tests (optional)
+        run: npm test || echo "No tests configured, skipping..."

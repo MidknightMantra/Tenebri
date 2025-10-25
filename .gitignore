@@ -1,0 +1,38 @@
+# ==========================
+# 🔐 Sensitive Environment Files
+# ==========================
+.env
+config.env
+
+# ==========================
+# 🤖 Baileys & Session Files
+# ==========================
+auth_info_baileys/
+session_backup.json
+session_backup.zip
+session-backup/
+creds.json
+
+# ==========================
+# 🧰 Build / Dependencies
+# ==========================
+node_modules/
+npm-debug.log*
+package-lock.json
+
+# ==========================
+# 🧪 Temp & Cache
+# ==========================
+.DS_Store
+Thumbs.db
+.cache/
+logs/
+temp/
+tmp/
+
+# ==========================
+# ⚙️ System & Editor
+# ==========================
+.vscode/
+.idea/
+*.log

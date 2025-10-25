@@ -1,0 +1,65 @@
+{
+  "name": "Tenebri MD",
+  "description": "🕷️ A powerful and elegant WhatsApp bot created by MidknightMantra.",
+  "repository": "https://github.com/MidknightMantra/Tenebri-MD",
+  "logo": "https://telegra.ph/file/adc46970456c26cad0c15.jpg",
+  "keywords": ["bot", "tenebri", "whatsapp", "baileys", "midknightmantra"],
+  "success_url": "/",
+
+  "env": {
+    "SESSION_ID": {
+      "description": "Your MEGA session file code (required to auto-login). Leave blank for QR login.",
+      "required": false
+    },
+    "BOT_NUMBER": {
+      "description": "Bot phone number (full, no +). Example: 254758925674",
+      "required": true
+    },
+    "OWNER_NUMBERS": {
+      "description": "Comma-separated owner numbers (no +). Example: 254758925674,254711111111",
+      "required": true
+    },
+    "OWNER_REACT": {
+      "description": "Emoji used for owner reactions.",
+      "required": false,
+      "value": "🔆"
+    },
+    "MODE": {
+      "description": "Bot mode: public | private | groups | inbox",
+      "required": false,
+      "value": "public"
+    },
+    "AUTO_READ_STATUS": {
+      "description": "Auto read statuses (true/false).",
+      "required": false,
+      "value": "true"
+    },
+    "READ_CMD": {
+      "description": "Read commands from chats (true/false).",
+      "required": false,
+      "value": "true"
+    },
+    "ALIVE_IMG": {
+      "description": "Image URL for the alive message.",
+      "required": false,
+      "value": "https://telegra.ph/file/adc46970456c26cad0c15.jpg"
+    },
+    "ALIVE_MSG": {
+      "description": "Custom alive message.",
+      "required": false,
+      "value": "👋 Hello there, *Tenebri* is alive and running!"
+    },
+    "OMDB_API_KEY": {
+      "description": "Optional: API key for OMDB movie lookup.",
+      "required": false
+    }
+  },
+
+  "buildpacks": [
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-nodejs.git"
+    }
+  ],
+
+  "stack": "heroku-24"
+}
