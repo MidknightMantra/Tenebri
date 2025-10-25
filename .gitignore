@@ -1,9 +1,47 @@
-echo "node_modules
+# ==========================
+# 🕷️ Tenebri MD Git Ignore
+# 👑 Owner: MidknightMantra
+# ==========================
+
+# 🧠 Node & Environment
+node_modules/
 .env
-auth_info_baileys
+config.env
+package-lock.json
+
+# 🔐 WhatsApp Auth / Session
+auth_info_baileys/
 session_backup.json
-temp
+session.json
+session/
+*.data.json
+*.store.json
+
+# 🧹 Temporary Files
+temp/
+tmp/
+*.log
+*.bak
+.DS_Store
+Thumbs.db
+
+# 📸 Cache & Generated Media
 *.mp4
 *.mp3
+*.ogg
+*.wav
+*.webp
+*.jpg
+*.jpeg
+*.png
+*.gif
 *.zip
-" > .gitignore
+*.tar.gz
+
+# 🧪 IDE / OS Files
+.vscode/
+.idea/
+*.swp
+
+# 🚫 Misc
+nohup.out
