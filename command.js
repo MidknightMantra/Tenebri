@@ -1,54 +1,46 @@
-// ==========================
-// 🕷️ Tenebri MD — Command Handler
+// ===============================
+// 🧠 Tenebri — Command Loader
 // 👑 Owner: MidknightMantra
-// ==========================
+// ===============================
 
-import { registerCommand } from './lib/commandRegistry.js'
+import fs from 'fs'
+import path from 'path'
+import { fileURLToPath } from 'url'
+import { commands, addCommand } from './lib/commandRegistry.js'
+
+// To allow ESM to use __dirname
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
 /**
- * @type {Array<Object>}
- * This keeps a list of all registered commands
- * — Useful for menus, help commands, etc.
+ * 📦 Load all plugins from the /plugins folder
  */
-export const commands = []
+export function loadPlugins() {
+  const pluginDir = path.join(__dirname, 'plugins')
 
-/**
- * Register a command
- * @param {Object} info - Command metadata (pattern, desc, category, etc.)
- * @param {Function} func - Command handler
- */
-export function cmd(info, func) {
-  const data = { ...info }
-
-  // ✅ Basic validation
-  if (!data.pattern) throw new Error('❌ command.pattern is required')
-
-  // 🧠 Default metadata
-  data.function = func
-  if (!('dontAddCommandList' in data)) data.dontAddCommandList = false
-  if (!data.desc) data.desc = ''
-  if (!data.fromMe) data.fromMe = false
-  if (!data.category) data.category = 'misc'
-  if (!data.filename) data.filename = import.meta.url
-
-  // 🪝 Register to command registry for fast lookup
-  registerCommand(data.pattern, async (conn, mek, context) => {
-    try {
-      await func(conn, mek, context)
-    } catch (err) {
-      console.error(`❌ [COMMAND ERROR: ${data.pattern}]`, err)
-      context.reply(`❌ Error executing *${data.pattern}* command.`)
-    }
-  }, {
-    desc: data.desc,
-    category: data.category,
-    fromMe: data.fromMe
-  })
-
-  // 📝 Add to legacy command list (optional help/menu support)
-  if (!data.dontAddCommandList) {
-    commands.push(data)
+  if (!fs.existsSync(pluginDir)) {
+    fs.mkdirSync(pluginDir)
   }
 
-  return data
+  const files = fs.readdirSync(pluginDir).filter(f => f.endsWith('.js'))
+  console.log(`📦 Loading Plugins...`)
+
+  for (const file of files) {
+    try {
+      const pluginPath = path.join(pluginDir, file)
+      const pluginModule = await import(`file://${pluginPath}`)
+
+      // If the plugin exports a default object or function, add it
+      if (pluginModule.default) {
+        const cmd = pluginModule.default
+        addCommand(cmd)
+      }
+
+      console.log(`✅ Loaded ${file}`)
+    } catch (err) {
+      console.error(`❌ Failed to load ${file}`, err)
+    }
+  }
+
+  console.log(`✨ ${commands.length} plugins loaded successfully`)
 }

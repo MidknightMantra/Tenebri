@@ -45,3 +45,9 @@ Thumbs.db
 
 # 🚫 Misc
 nohup.out
+session_backup.json
+tenebri_session/
+config.env
+.env
+auth_info_baileys/
+session_backup.json

@@ -1,45 +1,76 @@
 // ==========================
-// 📜 Tenebri MD — Help Command
+// 🕷️ Tenebri MD — Help Command
 // 👑 Owner: MidknightMantra
 // ==========================
 
-import { cmd } from '../command.js'
-import { listCommands } from '../lib/commandRegistry.js'
+let handler = async (m, { conn, args, usedPrefix }) => {
+  try {
+    // 🧠 Dynamically import the commands from the main registry
+    const { commands } = await import('../command.js')
 
-cmd(
-  {
-    pattern: 'help',
-    desc: 'Displays the list of all available commands',
-    category: 'system'
-  },
-  async (conn, mek, { reply, PREFIX }) => {
-    const allCommands = listCommands()
-
-    if (allCommands.length === 0) {
-      return reply('⚠️ No commands found.')
+    if (!commands || commands.length === 0) {
+      return await m.reply('⚠️ No commands found.')
     }
 
-    // 🧭 Group commands by category
-    const categorized = {}
-    for (const c of allCommands) {
-      const category = c.category || 'misc'
-      if (!categorized[category]) categorized[category] = []
-      categorized[category].push(c)
-    }
+    // 📌 If user typed `.help <command>`
+    if (args[0]) {
+      const name = args[0].toLowerCase()
+      const cmd =
+        commands.find(c => c.pattern === name) ||
+        commands.find(c => c.alias && c.alias.includes(name))
 
-    // 📝 Build help message
-    let menu = `🕷️ *Tenebri MD Command List*\n\n`
-    for (const [category, cmds] of Object.entries(categorized)) {
-      menu += `*${category.toUpperCase()}* (${cmds.length})\n`
-      for (const c of cmds) {
-        menu += ` • ${PREFIX}${c.pattern}${c.desc ? ` — ${c.desc}` : ''}\n`
+      if (!cmd) {
+        return await m.reply(`❌ Command *${name}* not found.`)
       }
-      menu += `\n`
+
+      let info = `🕷️ *Command Help*\n\n`
+      info += `✨ *Name:* ${cmd.pattern}\n`
+      if (cmd.alias) info += `🪄 *Alias:* ${cmd.alias.join(', ')}\n`
+      if (cmd.desc) info += `📝 *Description:* ${cmd.desc}\n`
+      if (cmd.tags) info += `📂 *Category:* ${cmd.tags.join(', ')}\n`
+      info += `⌨️ *Usage:* ${usedPrefix}${cmd.pattern}\n`
+
+      return await m.reply(info.trim())
     }
 
-    menu += `👑 *Owner:* MidknightMantra\n`
-    menu += `🖥️ Type *.help [command]* for details (optional)\n`
+    // 📜 Otherwise, list all commands by category
+    const categorized = {}
+    for (const c of commands) {
+      const tags = c.tags || ['misc']
+      for (const t of tags) {
+        if (!categorized[t]) categorized[t] = []
+        categorized[t].push(c)
+      }
+    }
 
-    reply(menu)
+    let menu = `🕷️ *Tenebri MD — Command List*\n\n`
+    menu += `⌨️ Prefix: *${usedPrefix}*\n`
+    menu += `📜 Total Commands: *${commands.length}*\n\n`
+
+    for (const [tag, cmds] of Object.entries(categorized)) {
+      menu += `╭━━━⊰ *${tag.toUpperCase()}* ⊱━━━╮\n`
+      cmds.forEach(c => {
+        menu += `┃ ✨ ${usedPrefix}${c.pattern}`
+        if (c.desc) menu += ` — ${c.desc}`
+        menu += `\n`
+      })
+      menu += `╰━━━━━━━━━━━━━━━╯\n\n`
+    }
+
+    menu += `🕸️ Type *${usedPrefix}help <command>* for details.\n`
+    menu += `👑 Owner: MidknightMantra`
+
+    await conn.sendMessage(m.chat, { text: menu.trim() }, { quoted: m })
+    m.react('🕷️')
+  } catch (e) {
+    console.error('[HELP PLUGIN ERROR]', e)
+    await m.reply('❌ Error displaying help menu.')
   }
-)
+}
+
+handler.help = ['help [command]']
+handler.tags = ['main']
+handler.command = ['help', 'h']
+handler.desc = 'Show all commands or help for a specific command'
+
+export default handler

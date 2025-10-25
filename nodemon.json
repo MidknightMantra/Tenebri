@@ -1,0 +1,7 @@
+{
+  "ignore": ["auth_info_baileys", "session_backup.json", "temp"],
+  "watch": ["."],
+  "ext": "js,json",
+  "exec": "node tenebri.js",
+  "legacyWatch": true
+}

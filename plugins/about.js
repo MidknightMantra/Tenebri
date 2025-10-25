@@ -1,32 +1,25 @@
 // ==========================
-// 🕷️ Tenebri MD - About Plugin
+// 🕷️ Tenebri MD — About Plugin
 // 👑 Owner: MidknightMantra
 // ==========================
 
 import config from '../config.js'
-import { cmd, commands } from '../command.js'
-import { runtime } from '../lib/utils.js'
+import { runtime } from '../lib/functions.js' // you already have runtime in functions.js
 
-cmd({
-  pattern: 'about',
-  desc: 'Displays Tenebri bot information.',
-  react: 'ℹ️',
-  category: 'main',
-  filename: import.meta.url
-}, 
-async (conn, mek, m, {
-  from, pushname, senderNumber, reply
-}) => {
+let handler = async (m, { conn }) => {
   try {
+    const { commands } = await import('../command.js')
     const uptime = runtime(process.uptime())
     const totalCommands = commands.length
+
+    const pushname = m.pushName || m.sender.split('@')[0]
 
     const about = `
 🕸️ *T͟E͟N͟E͟B͟R͟I͟ ͟M͟D͟ ͟-͟ ͟A͟B͟O͟U͟T͟* 🕸️
 
-👤 *Hello, ${pushname || senderNumber}!*  
+👤 *Hello, ${pushname}!*  
 
-✨ Tenebri is a modern, dark-themed multi-purpose WhatsApp bot —  
+✨ *Tenebri* is a dark-themed, modern multi-purpose WhatsApp bot —
 crafted to be fast, reliable, and powerful.
 
 📊 *Bot Information:*
@@ -35,25 +28,34 @@ crafted to be fast, reliable, and powerful.
 📦 Commands Loaded: ${totalCommands}
 👑 Owner: MidknightMantra
 📞 Owner Number: ${config.BOT_NUMBER}
-💻 GitHub: github.com/MidknightMantra
+💻 GitHub: https://github.com/MidknightMantra/Tenebri
 ────────────────────
 
-🖤 Thank you for using *Tenebri MD*.  
+🖤 Thank you for using *Tenebri MD*.
 Your presence strengthens the darkness.
 
 *© Tenebri MD — All rights reserved*
-`
+    `.trim()
 
     await conn.sendMessage(
-      from,
+      m.chat,
       {
-        image: { url: config.ALIVE_IMG || 'https://telegra.ph/file/adc46970456c26cad0c15.jpg' },
+        image: { url: config.ALIVE_IMG },
         caption: about
       },
-      { quoted: mek }
+      { quoted: m }
     )
+
+    m.react('ℹ️')
   } catch (e) {
-    console.error(e)
-    reply(`❌ Error: ${e.message}`)
+    console.error('[ABOUT PLUGIN ERROR]', e)
+    await m.reply(`❌ Error: ${e.message}`)
   }
-})
+}
+
+handler.help = ['about']
+handler.tags = ['main']
+handler.command = ['about', 'info']
+handler.desc = 'Display information about the Tenebri bot'
+
+export default handler

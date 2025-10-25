@@ -7,7 +7,7 @@
   "author": "MidknightMantra",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon tenebri.js",
+    "dev": "nodemon --config nodemon.json tenebri.js",
     "start": "pm2 start tenebri.js --name Tenebri --attach --deep-monitoring",
     "stop": "pm2 stop Tenebri",
     "restart": "pm2 restart Tenebri",

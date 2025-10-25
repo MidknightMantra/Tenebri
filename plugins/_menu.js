@@ -1,103 +1,131 @@
 // ==========================
-// 🕷️ Tenebri MD — Main Menu Command
+// 🕷️ Tenebri MD — Menu Plugin
 // 👑 Owner: MidknightMantra
 // ==========================
 
-import config from '../config.js'
-import { cmd, commands } from '../command.js'
-import { runtime } from '../lib/utils.js'
+import moment from 'moment-timezone'
 
-cmd(
-  {
-    pattern: 'menu',
-    desc: 'Shows the main menu with categorized commands.',
-    category: 'system'
-  },
-  async (conn, mek, { from, pushname, reply }) => {
-    try {
-      const username = pushname || 'User'
-      const botName = config.BOT_NAME || 'Tenebri MD'
-      const ownerName = config.OWNER_NAME || 'MidknightMantra'
+// 📌 Tenebri doesn't rely on global.db for users, so we’ll simplify.
+let handler = async (m, { conn, usedPrefix }) => {
+  try {
+    // 🕒 Date and Time
+    const d = new Date()
+    const locale = 'en'
+    const date = d.toLocaleDateString(locale, {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric'
+    })
+    const uptime = clockString(process.uptime() * 1000)
 
-      // 🕓 Time-based greeting
-      const now = new Date()
-      const hour = now.getHours()
-      let greeting
-      if (hour >= 5 && hour < 12) greeting = '🌅 Good Morning'
-      else if (hour >= 12 && hour < 18) greeting = '☀️ Good Afternoon'
-      else if (hour >= 18 && hour < 21) greeting = '🌆 Good Evening'
-      else greeting = '🌙 Good Night'
+    // 🧑 User info
+    const taguser = '@' + m.sender.split('@')[0]
+    const greeting = ucapan()
+    const quote = quotes[Math.floor(Math.random() * quotes.length)]
 
-      // 🕒 Format time and date
-      const timeOptions = { hour: 'numeric', minute: '2-digit', hour12: true }
-      const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' }
-      const currentTime = now.toLocaleTimeString('en-US', timeOptions)
-      const currentDate = now.toLocaleDateString('en-US', dateOptions)
+    // 🕸 Bot info
+    const botName = '🕷️ Tenebri'
+    const owner = '👑 MidknightMantra'
+    const platform = process.platform
 
-      // 🧭 Command categories
-      const menu = {
-        main: { label: '🔧 Main Menu', list: '' },
-        download: { label: '📥 Download Menu', list: '' },
-        group: { label: '👥 Group Menu', list: '' },
-        owner: { label: '🔒 Owner Menu', list: '' },
-        convert: { label: '🔄 Convert Menu', list: '' },
-        search: { label: '🔍 Search Menu', list: '' },
-        fun: { label: '🎉 Fun Menu', list: '' },
-        other: { label: '⚙️ Other Menu', list: '' }
-      }
+    // 📌 Menu message
+    const text = `
+╭━━━⊰ *${botName}* ⊱━━━╮
+┃ 👋 Hello, ${taguser}!
+┃ ${greeting}
+┃
+┃ 📜 ${quote}
+╰━━━━━━━━━━━━━━━╯
 
-      // 🧾 Categorize commands
-      for (const c of commands) {
-        if (c.pattern && !c.dontAddCommandList) {
-          const cat = menu[c.category] ? c.category : 'other'
-          menu[cat].list += `.${c.pattern}\n`
-        }
-      }
+╭━━━⊰ *TODAY* ⊱━━━╮
+┃ 📅 Date: ${date}
+┃ ⏰ Time: ${moment().tz('Africa/Nairobi').format('HH:mm:ss')}
+╰━━━━━━━━━━━━━━━╯
 
-      // 🕸️ Build the menu caption
-      let madeMenu = `
-🕷️👑 ${botName} 👑🕷️
+╭━━━⊰ *BOT INFO* ⊱━━━╮
+┃ 🤖 Bot Name: ${botName}
+┃ 👑 Owner: ${owner}
+┃ 🖥️ Platform: ${platform}
+┃ ⌨️ Prefix: ${usedPrefix}
+┃ ⏱️ Uptime: ${uptime}
+╰━━━━━━━━━━━━━━━╯
 
-${greeting}, *${username}* 👋
-🕒 ${currentTime} | 📅 ${currentDate}
-
-✨ Welcome to *${botName}* ✨
-
-📊 *Bot Information*
-────────────────────
-🤖 *Bot Name:* ${botName}
-👑 *Owner:* ${ownerName}
-📞 *Bot Number:* ${config.BOT_NUMBER}
-⏳ *Uptime:* ${runtime(process.uptime())}
-────────────────────
+🧠 Type *${usedPrefix}list* to see all commands
 `
 
-      for (const key of Object.keys(menu)) {
-        const section = menu[key]
-        if (section.list.trim().length > 0) {
-          const count = section.list.split('\n').filter(Boolean).length
-          madeMenu += `${section.label} (${count})\n${section.list}\n`
-        }
-      }
+    // 🔘 Buttons
+    const buttons = [
+      ['🔍 Commands', `${usedPrefix}list`],
+      ['⚡ Ping', `${usedPrefix}ping`]
+    ]
 
-      madeMenu += `
-────────────────────
-*© ${botName}*
-👑 ${ownerName}
-💻 github.com/MidknightMantra
-`
+    // 🌐 URL buttons
+    const urls = [
+      ['💻 GitHub', 'https://github.com/MidknightMantra'],
+      ['🎥 YouTube', 'https://youtube.com'],
+      ['🕸️ Tenebri', 'https://github.com/MidknightMantra/Tenebri']
+    ]
 
-      await conn.sendMessage(
-        from,
-        {
-          image: { url: config.ALIVE_IMG },
-          caption: madeMenu
-        },
-        { quoted: mek }
-      )
-    } catch (e) {
-      console.error('[MENU ERROR]', e)
-      reply(`❌ ${e.message}`)
-    }
+    // 🖼 Logo
+    const logo = 'https://telegra.ph/file/adc46970456c26cad0c15.jpg'
+
+    // 📩 Send menu message with buttons and links
+    await conn.sendButton(
+      m.chat,
+      text.trim(),
+      '© Tenebri MD | 2025',
+      logo,
+      buttons,
+      null,
+      urls,
+      m
+    )
+
+    m.react('🤖')
+  } catch (e) {
+    console.error('[MENU ERROR]', e)
+    await m.reply(
+      `🕷️ *Tenebri Menu*\n\nUse these commands:\n• ${usedPrefix}help - Show all commands\n• ${usedPrefix}ping - Check bot speed\n• ${usedPrefix}alive - Bot status`
+    )
   }
-)
+}
+
+handler.help = ['menu', 'help', 'h']
+handler.tags = ['main']
+handler.command = ['menu', 'help', 'h']
+handler.desc = 'Show the bot menu with time, uptime, and command list'
+
+export default handler
+
+// 🕒 Format uptime
+function clockString(ms) {
+  const h = isNaN(ms) ? '--' : Math.floor(ms / 3600000)
+  const m = isNaN(ms) ? '--' : Math.floor(ms / 60000) % 60
+  const s = isNaN(ms) ? '--' : Math.floor(ms / 1000) % 60
+  return [h, m, s].map(v => v.toString().padStart(2, '0')).join(':')
+}
+
+// 🌅 Greeting function
+function ucapan() {
+  const hour = parseInt(moment().tz('Africa/Nairobi').format('HH'))
+  if (hour >= 0 && hour < 4) return 'Good Night 🌙'
+  if (hour >= 4 && hour < 12) return 'Good Morning 🌄'
+  if (hour >= 12 && hour < 16) return 'Good Afternoon ☀️'
+  if (hour >= 16 && hour < 19) return 'Good Evening 🌇'
+  return 'Good Night 🌙'
+}
+
+// 📝 Quotes Array
+const quotes = [
+  "I'm not lazy, I'm just on my energy saving mode.",
+  'Life is short, smile while you still have teeth.',
+  'I may be a bad influence, but darn I am fun!',
+  "I'm on a whiskey diet. I've lost three days already.",
+  "Why don't some couples go to the gym? Because some relationships don't work out.",
+  'I told my wife she should embrace her mistakes... She gave me a hug.',
+  "I'm great at multitasking. I can waste time, be unproductive, and procrastinate all at once.",
+  'The early bird can have the worm because worms are gross and mornings are stupid.',
+  "I'm not saying I'm Wonder Woman, I'm just saying no one has ever seen me and Wonder Woman in the same room together.",
+  "If life gives you lemons, make lemonade. Then find someone whose life has given them vodka and have a party!",
+  'Some people just need a high-five. In the face. With a chair.'
+]
