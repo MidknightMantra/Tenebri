@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://telegra.ph/file/adc46970456c26cad0c15.jpg" width="300" height="300">
+<img src="https://wallpapers.com/images/hd/black-panther-4k-ultra-hd-dark-mask-8fi3yeo8tgazhr5h.jpg" width="300" height="300">
 
 <p align="center">
   <a href="#">
