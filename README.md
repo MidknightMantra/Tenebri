@@ -7,7 +7,7 @@ It’s designed to help admins efficiently manage WhatsApp groups.
 
 <div align="center">
   <a href="https://git.io/typing-svg">
-    <img src="https://readme-typing-svg.demolab.com?font=Ribeye&size=50&pause=1000&color=33FF00&center=true&width=910&height=100&lines=Tenebri;Multi+Device+WhatsApp+Bot;By+MidknightMantra" alt="Tenebri Typing SVG" />
+    <img src="https://readme-typing-svg.demolab.com?font=Kranky&size=50&pause=1000&color=33FF00&center=true&width=910&height=100&lines=Tenebri;Multi+Device+WhatsApp+Bot;By+MidknightMantra" alt="Tenebri Typing SVG" />
   </a>
 </div>
 
