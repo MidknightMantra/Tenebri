@@ -19,20 +19,20 @@ It’s designed to help admins efficiently manage WhatsApp groups.
 ---
 
 
-
 ## 🚀 Steps to Deploy
 
-### Step 1: Fork the Repository
+### 🪄 Step 1: Fork the Repository
 
-Click the button below to fork the Knight Bot repository to your GitHub account:
+Click the button below to **fork the Knight Bot repository** to your GitHub account:
 
 <div align="center">
-  <a href="https://github.com/mruniquehacker/Knightbot-MD/fork">
-    <img src="https://img.shields.io/badge/Fork-Repository-blue?style=for-the-badge" alt="Fork the repository"/>
+  <a href="https://github.com/mruniquehacker/Knightbot-MD/fork" target="_blank">
+    <img src="https://img.shields.io/badge/Fork%20Repository-0A66C2?style=for-the-badge&logo=github&logoColor=white" alt="Fork the Repository" />
   </a>
 </div>
 
 ---
+
 
 ### Step 2: Get Pair Code
 
