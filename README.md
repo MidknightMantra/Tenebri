@@ -2,13 +2,6 @@
   <span style="color:#33FF00; animation: flash 1.5s infinite;">⚡TENEBRI⚡</span>
 </h1>
 
-<style>
-@keyframes flash {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.2; }
-}
-</style>
-
 This is a **WhatsApp bot** built using the **Baileys** library for group management — including features like tagging all members, muting/unmuting, and much more.  
 It’s designed to help admins efficiently manage WhatsApp groups.
 
