@@ -90,7 +90,7 @@ For further customization and setup guidance, click one of the buttons below:
   <a href="https://t.me/+3QhFUZHx-nhhZmY1" target="_blank">
     <img src="https://img.shields.io/badge/Join%20Telegram-0088CC?style=for-the-badge&logo=telegram&logoColor=white" alt="Join Telegram" />
   </a>
-  <a href="https://whatsapp.com/channel/0029Va90zAnIHphOuO8Msp3A" target="_blank">
+  <a href="https://whatsapp.com/channel/0029Vb74Dlf4CrfoqpAEBC2T" target="_blank">
     <img src="https://img.shields.io/badge/Join%20WhatsApp-25D366?style=for-the-badge&logo=whatsapp&logoColor=white" alt="Join WhatsApp Channel" />
   </a>
 </div>
@@ -112,7 +112,7 @@ For further customization and setup guidance, click one of the buttons below:
 
 ## 📖 About
 
-**Knight Bot** is a **multi-device WhatsApp automation bot** designed to help admins efficiently manage large groups.  
+**Tenebri** is a **multi-device WhatsApp automation bot** designed to help admins efficiently manage large groups.  
 It leverages the powerful **[Baileys](https://github.com/WhiskeySockets/Baileys)** library to interact with the WhatsApp Web API, ensuring seamless performance and reliability.
 
 Built for simplicity and speed:
@@ -123,7 +123,7 @@ Built for simplicity and speed:
 
 ---
 
-> “Knight Bot — empowering WhatsApp admins with automation, precision, and control.”
+> “Tenebri — empowering WhatsApp admins with automation, precision, and control.”
 
 ## 🛠️ Setup & Installation
 
@@ -142,8 +142,8 @@ Before you begin, ensure you have the following installed on your system:
 1. **Clone the repository**
 
     ```bash
-    git clone https://github.com/mruniquehacker/Knightbot-MD.git
-    cd Knightbot-MD
+    git clone https://github.com/MidknightMantra/Tenebri.git
+    cd Tenebri
     ```
 
 2. **Install dependencies**
@@ -167,7 +167,7 @@ Before you begin, ensure you have the following installed on your system:
 
 ### ✅ Setup Complete
 
-Your **Knight Bot** is now up and running! 🎉  
+Your **Tenebri** is now up and running! 🎉  
 Use the available commands in your WhatsApp group to start managing members and automating tasks.
 
 ---
@@ -175,14 +175,14 @@ Use the available commands in your WhatsApp group to start managing members and 
 ## 📄 License
 
 This project is licensed under the [MIT License](https://opensource.org/licenses/MIT) —  
-see the [LICENSE](https://github.com/mruniquehacker/Knightbot-MD/blob/main/LICENSE) file for full details.
+see the [LICENSE](https://github.com/MidknightMantra/Tenebri/blob/main/LICENSE) file for full details.
 
 ---
 
 ## 🙌 Contributions
 
 Contributions, issues, and feature requests are **always welcome!**  
-Feel free to check out the [issues page](https://github.com/mruniquehacker/Knightbot-MD/issues) and contribute to the project.
+Feel free to check out the [issues page](https://github.com/MidknightMantra/Tenenri/issues) and contribute to the project.
 
 > 🧠 Tip: Before submitting a pull request, make sure to test your changes thoroughly.
 
@@ -190,7 +190,7 @@ Feel free to check out the [issues page](https://github.com/mruniquehacker/Knigh
 
 ## 🌟 Show Your Support
 
-If you find **Knight Bot** helpful or inspiring, please give it a [⭐️ star on GitHub](https://github.com/mruniquehacker/Knightbot)!  
+If you find **Tenebri** helpful or inspiring, please give it a [⭐️ star on GitHub](https://github.com/MidknightMantra/Tenebri)!  
 Your support helps the project grow and motivates further development.
 
 ---
@@ -199,14 +199,14 @@ Your support helps the project grow and motivates further development.
 
 Special thanks to the awesome developers who made **Knight Bot** possible:
 
-- 🧑‍💻 [**Professor**](https://github.com/mruniquehacker) — Main Developer  
+- 🧑‍💻 [**Midknight Mantra**](https://github.com/MidknightMantra) — Main Developer  
 - ⚙️ [**Baileys**](https://github.com/adiwajshing/Baileys) — WhatsApp Web API Library  
-- 🔐 [**TechGod143**](https://github.com/TechGod143) — Pair Code Integration  
+- 🔐 [**Professor**](https://github.com/mruniquehacker) — Base bot 
 - 💡 [**Dgxeon**](https://github.com/Dgxeon) — Pair Code Support  
 
 ---
 
-> ⚔️ *“Knight Bot — automation forged with code, discipline, and precision.”*
+> ⚔️ *“Tenebri — automation forged with code, discipline, and precision.”*
 
 ## ⚠️ Important Warning
 
@@ -240,7 +240,7 @@ By using this software, you agree to the following conditions:
 
 ## 📜 Copyright Notice
 
-**Copyright © 2024 [Professor](https://github.com/mruniquehacker). All rights reserved.**
+**Copyright © 2024 [Midknight Mantra](https://github.com/MidknightMantra). All rights reserved.**
 
 This project includes open-source code from various sources:
 - 🧠 [Baileys](https://github.com/WhiskeySockets/Baileys) — MIT License  
@@ -248,4 +248,4 @@ This project includes open-source code from various sources:
 
 ---
 
-> ⚔️ *Knight Bot promotes responsible automation — power should always come with discipline.*
+> ⚔️ *Tenebri promotes responsible automation — power should always come with discipline.*
