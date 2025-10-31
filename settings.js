@@ -1,16 +1,16 @@
 const settings = {
-  packname: 'Knight Bot',
-  author: '‎',
-  botName: "Knight Bot",
-  botOwner: 'Professor', // Your name
-  ownerNumber: '919876543210', //Set your number here without + symbol, just add country code & number without any space
+  packname: 'Tenebri',
+  author: 'Midknight Mantra',
+  botName: "Tenebri",
+  botOwner: 'Midknight Mantra', // Your name
+  ownerNumber: '254758925674', //Set your number here without + symbol, just add country code & number without any space
   giphyApiKey: 'qnl7ssQChTdPjsKta2Ax2LMaGXz303tq',
   commandMode: "public",
   maxStoreMessages: 20, 
   storeWriteInterval: 10000,
-  description: "This is a bot for managing group commands and automating tasks.",
-  version: "2.2.3",
-  updateZipUrl: "https://github.com/mruniquehacker/Knightbot-MD/archive/refs/heads/main.zip",
+  description: "In the silence of the void, he found the truth—cold, cruel, and inevitable.",
+  version: "1.5.0",
+  updateZipUrl: "https://github.com/MidknightMantra/Tenebri/archive/refs/heads/main.zip",
 };
 
 module.exports = settings;
