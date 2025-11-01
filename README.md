@@ -2,8 +2,8 @@
   <span style="color:#33FF00; animation: flash 1.5s infinite;">⚡TENEBRI⚡</span>
 </h1>
 
-This is a **WhatsApp bot** built using the **Baileys** library for group management — including features like tagging all members, muting/unmuting, and much more.  
-It’s designed to help admins efficiently manage WhatsApp groups.
+From the shadows emerges **Tenebri**, a **WhatsApp bot** forged with the **Baileys** library for unyielding group dominion — summoning all members, silencing the chaos, and beyond.  
+A brave sentinel designed to empower admins in the eternal battle to command WhatsApp realms.
 
 <div align="center">
   <a href="https://git.io/typing-svg">
@@ -16,26 +16,28 @@ It’s designed to help admins efficiently manage WhatsApp groups.
   </a>
 </div>
 
+🌑⚔️ **Bound to the Void — Rise and Conquer the Shadows!** 🕯️
+
 ---
 
-## 🚀 Steps to Deploy
+## 🚀 Forge Your Path to Deployment
 
-### 🪄 Step 1: Fork the Repository
+### 🪄 Ritual 1: Fork the Ancient Repository
 
-Click the button below to **fork the Knight Bot repository** to your GitHub account:
+Invoke the button below to **fork the Tenebri grimoire** into your GitHub sanctum:
 
 <div align="center">
-  <a href="https://github.com/MidknightMantra/Tenbri/fork" target="_blank">
+  <a href="https://github.com/MidknightMantra/Tenebri/fork" target="_blank">
     <img src="https://img.shields.io/badge/Fork%20Repository-0A66C2?style=for-the-badge&logo=github&logoColor=white" alt="Fork the Repository" />
   </a>
 </div>
 
 ---
 
-### ⚡ Step 2: Get Pair Code
+### ⚡ Ritual 2: Summon the Pair Code
 
-Deploy the bot and easily connect it to your WhatsApp account using a **pair code**.  
-Click one of the buttons below to deploy or generate your code.
+Awaken the bot and bind it to your WhatsApp essence using a **pair code**.  
+Conjure one of the arcane portals below to deploy or manifest your code.
 
 <div align="center">
   <a href="https://replit.com/@DGXeon/Xeon-PairCode?v=1" target="_blank">
@@ -51,15 +53,15 @@ Click one of the buttons below to deploy or generate your code.
 
 ---
 
-### 🗂️ After getting your `creds.json` file
+### 🗂️ After Unveiling Your `creds.json` Artifact
 
-Upload it to the **`/session`** folder in your project directory.
+Ascend it to the **`/session`** crypt within your project lair.
 
 ---
 
-### 🚀 Step 3: Deploy Now
+### 🚀 Ritual 3: Ignite the Deployment
 
-For further customization and setup guidance, click one of the buttons below:
+For deeper incantations and arcane tweaks, traverse these shadowed paths:
 
 <div align="center">
   <a href="https://youtu.be/-oz_u1iMgf8" target="_blank">
@@ -72,7 +74,7 @@ For further customization and setup guidance, click one of the buttons below:
 
 ---
 
-### 🌐 Deploy Now on Katabump Panel
+### 🌐 Deploy Amidst the Katabump Abyss
 
 <div align="center">
   <a href="https://dashboard.katabump.com/auth/login#d6b7d6" target="_blank">
@@ -82,7 +84,7 @@ For further customization and setup guidance, click one of the buttons below:
 
 ---
 
-### 💬 Join Us
+### 💬 Merge with the Shadows
 
 <div align="center">
   <a href="https://t.me/+3QhFUZHx-nhhZmY1" target="_blank">
@@ -95,49 +97,49 @@ For further customization and setup guidance, click one of the buttons below:
 
 ---
 
-## ⚙️ Features
+## ⚙️ Arcane Powers
 
-- 🧩 **Tag all group members** with the `.tagall` command
-- 👑 **Admin-restricted usage** — only group admins can access certain commands
-- 🎮 **Interactive games** like Tic-Tac-Toe for fun group engagement
-- 🗣️ **Text-to-Speech** with the `.tts` command
-- 🖼️ **Sticker creation** using `.sticker`
-- 🔗 **Anti-link detection** to maintain group safety
-- ⚠️ **Warn and manage members** with admin-level control
-
----
-
-## 📖 About
-
-**Tenebri** is a **multi-device WhatsApp automation bot** designed to help admins efficiently manage large groups.  
-It leverages the powerful **[Baileys](https://github.com/WhiskeySockets/Baileys)** library to interact with the WhatsApp Web API, ensuring seamless performance and reliability.
-
-Built for simplicity and speed:
-
-- ⚡ Lightweight and easy to deploy
-- 🧠 Fully customizable — extend with your own commands
-- 🔐 Secure authentication using **QR code or pair code**
-- 💻 Runs in a **Node.js environment** for stability and scalability
+- 🧩 **Summon All Souls** with the `.tagall` invocation
+- 👑 **Admin-Only Dominion** — only the valiant guardians wield forbidden commands
+- 🎮 **Trials of Wit** like Tic-Tac-Toe for shadowed amusement
+- 🗣️ **Echoes from the Void** via `.tts` sorcery
+- 🖼️ **Forge Stickers** using `.sticker` alchemy
+- 🔗 **Banish Forbidden Links** to guard the realm
+- ⚠️ **Warn and Exile Mortals** with unyielding control
 
 ---
 
-> “Tenebri — empowering WhatsApp admins with automation, precision, and control.”
+## 📖 Lore of Tenebri
 
-## 🛠️ Setup & Installation
+**Tenebri** is a **multi-device WhatsApp sentinel** crafted to arm guardians in their quest to tame chaotic hordes.  
+It harnesses the mighty **[Baileys](https://github.com/WhiskeySockets/Baileys)** grimoire to commune with the WhatsApp Web ether, ensuring flawless vigilance and might.
 
-### ⚙️ Prerequisites
+Tempered for the brave:
 
-Before you begin, ensure you have the following installed on your system:
-
-- [Node.js](https://nodejs.org/en/) (LTS version recommended)
-- [Git](https://git-scm.com/) (for cloning the repository)
-- A stable internet connection
+- ⚡ Ethereal and swift to summon
+- 🧠 Infinitely malleable — infuse with your own dark spells
+- 🔐 Fortified binding via **QR glyph or pair incantation**
+- 💻 Thrives in **Node.js shadows** for eternal resilience
 
 ---
 
-### 🧩 Step-by-Step Setup
+> “Tenebri — forged in darkness, wielding courage against the abyss.”
 
-1. **Clone the repository**
+## 🛠️ Invocation & Awakening
+
+### ⚙️ Prerequisites for the Ritual
+
+Before igniting the flame, arm yourself with:
+
+- [Node.js](https://nodejs.org/en/) (LTS variant advised)
+- [Git](https://git-scm.com/) (to summon the repository)
+- A tether to the eternal web
+
+---
+
+### 🧩 Step-by-Step Awakening
+
+1. **Summon the Grimoire**
 
    ```bash
    git clone https://github.com/MidknightMantra/Tenebri.git
@@ -163,88 +165,88 @@ Before you begin, ensure you have the following installed on your system:
 
 ---
 
-### ✅ Setup Complete
+### ✅ Awakening Fulfilled
 
-Your **Tenebri** is now up and running! 🎉  
-Use the available commands in your WhatsApp group to start managing members and automating tasks.
-
----
-
-## 📄 License
-
-This project is licensed under the [MIT License](https://opensource.org/licenses/MIT) —  
-see the [LICENSE](https://github.com/MidknightMantra/Tenebri/blob/main/LICENSE) file for full details.
+**Tenebri** stands vigilant! 🎉  
+Wield its powers in your WhatsApp domain to command and conquer.
 
 ---
 
-## 🙌 Contributions
+## 📄 Eternal Covenant
 
-Contributions, issues, and feature requests are **always welcome!**  
-Feel free to check out the [issues page](https://github.com/MidknightMantra/Tenenri/issues) and contribute to the project.
-
-> 🧠 Tip: Before submitting a pull request, make sure to test your changes thoroughly.
+This grimoire is bound by the [MIT License](https://opensource.org/licenses/MIT) —  
+behold the [LICENSE](https://github.com/MidknightMantra/Tenebri/blob/main/LICENSE) scroll for the full oath.
 
 ---
 
-## 🌟 Show Your Support
+## 🙌 Contribute to the Legend
 
-If you find **Tenebri** helpful or inspiring, please give it a [⭐️ star on GitHub](https://github.com/MidknightMantra/Tenebri)!  
-Your support helps the project grow and motivates further development.
+Summonings, curses, and visions are **ever welcomed!**  
+Delve into the [issues crypt](https://github.com/MidknightMantra/Tenebri/issues) and etch your mark upon the tome.
 
----
-
-## 👏 Credits
-
-Special thanks to the awesome developers who made **Knight Bot** possible:
-
-- 🧑‍💻 [**Midknight Mantra**](https://github.com/MidknightMantra) — Main Developer
-- ⚙️ [**Baileys**](https://github.com/adiwajshing/Baileys) — WhatsApp Web API Library
-- 🔐 [**Professor**](https://github.com/mruniquehacker) — Base bot
-- 💡 [**Dgxeon**](https://github.com/Dgxeon) — Pair Code Support
+> 🧠 Wisdom: Test your incantations thoroughly before offering them to the void.
 
 ---
 
-> ⚔️ _“Tenebri — automation forged with code, discipline, and precision.”_
+## 🌟 Illuminate the Stars
 
-## ⚠️ Important Warning
-
-> **Disclaimer:**  
-> This bot is created **for educational purposes only**. It is **not an official WhatsApp bot**.  
-> Using this bot **may lead to your WhatsApp account being banned**.  
-> Proceed **at your own risk** — the developers are **not responsible** for any bans, misuse, or consequences arising from its use.
+If **Tenebri** ignites your spirit or guides your quest, bestow a [⭐️ upon its GitHub shrine](https://github.com/MidknightMantra/Tenebri)!  
+Your favor fuels the eternal flame and summons greater evolutions.
 
 ---
 
-## 📝 Legal Notice
+## 👏 Honored Ancestors
 
-- This project is **not affiliated**, **authorized**, **maintained**, **sponsored**, or **endorsed** by **WhatsApp Inc.** or any of its subsidiaries.
-- It is an **independent and unofficial** software project.
-- Use responsibly — **do not spam**, **do not send bulk messages**, and **do not use for illegal purposes**.
-- The developers **assume no liability** for misuse, damage, or violations caused by the program.
+Gratitude to the shadowy artisans who birthed **Tenebri**:
 
----
-
-## 📘 License Terms
-
-This project is licensed under the **[MIT License](https://opensource.org/licenses/MIT)**.  
-By using this software, you agree to the following conditions:
-
-- ✅ Use it **in compliance with all applicable laws and regulations**.
-- 🧾 Include **original license and copyright notices**.
-- 🙏 Credit the **original authors**.
-- 🚫 Do **not** use it for spam, malicious, or unethical purposes.
+- 🧑‍💻 [**Midknight Mantra**](https://github.com/MidknightMantra) — Prime Conjurer
+- ⚙️ [**Baileys**](https://github.com/adiwajshing/Baileys) — WhatsApp Web Arcana
+- 🔐 [**Professor**](https://github.com/mruniquehacker) — Foundational Sentinel
+- 💡 [**Dgxeon**](https://github.com/Dgxeon) — Pair Code Weaver
 
 ---
 
-## 📜 Copyright Notice
+> ⚔️ _“Tenebri — where code meets valor in the heart of darkness.”_
 
-**Copyright © 2024 [Midknight Mantra](https://github.com/MidknightMantra). All rights reserved.**
+## ⚠️ Ominous Omen
 
-This project includes open-source code from various sources:
-
-- 🧠 [Baileys](https://github.com/WhiskeySockets/Baileys) — MIT License
-- 📦 Other dependencies listed in `package.json`
+> **Shadowed Warning:**  
+> This sentinel is conjured **for scholarly pursuits alone**. It is **no official WhatsApp emissary**.  
+> Invoking it **may summon bans upon your WhatsApp vessel**.  
+> Tread **at your peril** — the conjurers **disclaim all curses, misdeeds, or fates** that befall.
 
 ---
 
-> ⚔️ _Tenebri promotes responsible automation — power should always come with discipline._
+## 📝 Decree of the Void
+
+- This tome is **unaffiliated**, **unsanctioned**, **unguarded**, **unpatroned**, or **unblessed** by **WhatsApp Inc.** or its kin.
+- It stands as an **autonomous and heretical** artifact.
+- Wield with caution — **shun spam**, **eschew floods**, and **abjure illicit rites**.
+- The artisans **absolve themselves** of all havoc, ruin, or transgressions wrought by the relic.
+
+---
+
+## 📘 Covenant Terms
+
+Bound by the **[MIT License](https://opensource.org/licenses/MIT)**.  
+By invoking this essence, you pledge:
+
+- ✅ Harmony with **all laws and edicts of the realm**.
+- 🧾 Preserve **ancient licenses and seals**.
+- 🙏 Honor the **primeval creators**.
+- 🚫 Forbid **spam, malice, or unholy deeds**.
+
+---
+
+## 📜 Seal of Origin
+
+**Copyright © 2025 [Midknight Mantra](https://github.com/MidknightMantra). All rites reserved.**
+
+This grimoire enfolds arcane wisdom from distant sources:
+
+- 🧠 [Baileys](https://github.com/WhiskeySockets/Baileys) — MIT Covenant
+- 📦 Other essences chronicled in `package.json`
+
+---
+
+> ⚔️ _Tenebri champions vigilant automation — might must ever bow to honor._
