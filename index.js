@@ -1,6 +1,6 @@
 /**
  * ╔═══════════════════════════════════════════════╗
- *  🕯️ Tenebri v1.6.3 — Forged in Eternal Shadows
+ *  🕯️ Tenebri v1.6.4 — Forged in Eternal Shadows
  *  by Midknight Mantra
  * ╚═══════════════════════════════════════════════╝
  */
@@ -92,53 +92,70 @@ async function startLauncher() {
   startTenebriCore();
 }
 
-// Custom themed logger without external dependencies
+// Custom themed logger without external dependencies, pino-compatible
 function createThemedLogger(baseLevel) {
   const levels = {
-    trace: 10,
-    debug: 20,
-    info: 30,
-    warn: 40,
-    error: 50,
-    fatal: 60,
-    silent: Infinity
+    trace: { value: 10, color: chalk.gray },
+    debug: { value: 20, color: chalk.blue },
+    info: { value: 30, color: chalk.cyan },
+    warn: { value: 40, color: chalk.yellow },
+    error: { value: 50, color: chalk.red },
+    fatal: { value: 60, color: chalk.redBright },
+    silent: { value: Infinity, color: chalk.white }
   };
 
-  const currentLevel = levels[baseLevel] || levels.warn;
+  const currentLevelValue = levels[baseLevel]?.value || levels.warn.value;
 
-  return function logger(bindings = {}) {
-    const log = (levelKey, msg, extra = {}) => {
-      if (levels[levelKey] < currentLevel) return;
+  const createLogger = (bindings = {}) => {
+    const logMethod = (levelKey, ...args) => {
+      const level = levels[levelKey];
+      if (!level || level.value < currentLevelValue) return;
 
-      const className = bindings.class || extra.class || 'Void';
-      let color;
-      switch (levelKey) {
-        case 'trace': color = chalk.gray; break;
-        case 'debug': color = chalk.blue; break;
-        case 'info': color = chalk.cyan; break;
-        case 'warn': color = chalk.yellow; break;
-        case 'error': color = chalk.red; break;
-        case 'fatal': color = chalk.redBright; break;
-        default: color = chalk.white;
+      let obj = { ...bindings };
+      let msg = '';
+      let interpolations = [];
+
+      // Handle pino-style arguments
+      if (args.length > 0) {
+        if (typeof args[0] === 'object' && args[0] !== null) {
+          obj = { ...obj, ...args.shift() };
+        }
+        if (typeof args[0] === 'string') {
+          msg = args.shift();
+        }
+        interpolations = args;
       }
 
+      // If msg has placeholders, interpolate
+      if (interpolations.length > 0 && msg.includes('%')) {
+        msg = msg.replace(/%[sdj]/g, () => JSON.stringify(interpolations.shift()));
+      }
+
+      const className = obj.class || obj.component || 'Void';
+      delete obj.class; // Clean up for extra print
+      delete obj.component;
+
+      const color = level.color;
       console.log(color(`—◉ [${className.toUpperCase()}] ${msg}`));
-      if (Object.keys(extra).length > 0) {
-        console.log(chalk.dim(JSON.stringify(extra, null, 2)));
+
+      if (Object.keys(obj).length > 0) {
+        console.log(chalk.dim(JSON.stringify(obj, null, 2)));
       }
     };
 
     return {
-      trace: (msg, extra) => log('trace', msg, extra),
-      debug: (msg, extra) => log('debug', msg, extra),
-      info: (msg, extra) => log('info', msg, extra),
-      warn: (msg, extra) => log('warn', msg, extra),
-      error: (msg, extra) => log('error', msg, extra),
-      fatal: (msg, extra) => log('fatal', msg, extra),
+      trace: (...args) => logMethod('trace', ...args),
+      debug: (...args) => logMethod('debug', ...args),
+      info: (...args) => logMethod('info', ...args),
+      warn: (...args) => logMethod('warn', ...args),
+      error: (...args) => logMethod('error', ...args),
+      fatal: (...args) => logMethod('fatal', ...args),
       level: baseLevel,
-      child: (newBindings) => createThemedLogger(baseLevel)({ ...bindings, ...newBindings })
+      child: (newBindings) => createLogger({ ...bindings, ...newBindings })
     };
   };
+
+  return createLogger;
 }
 
 // ===============================
@@ -166,7 +183,7 @@ async function startTenebriCore() {
 
     const conn = makeWASocket({
       auth: state,
-      browser: ["Tenebri", "Chrome", "1.6.3"],
+      browser: ["Tenebri", "Chrome", "1.6.4"],
       version,
       logger, // Use custom themed logger
       getMessage: async (key) => {
