@@ -1,66 +1,69 @@
 /**
  * =========================================================
- *  🕯️ TENEBRI — Core Settings
- *  Version: 1.5.0
+ *  🕯️ TENEBRI — Eternal Bindings
+ *  Version: 1.6.4
  *  Author: Midknight Mantra
  *  Description:
- *    In the silence of the void, he found the truth—
- *    cold, cruel, and inevitable.
+ *    Forged in the abyss, Tenebri rises — brave sentinel of shadows,
+ *    wielding unyielding truth against the void's cruel embrace.
  * =========================================================
  */
 
 require("dotenv").config();
 
 const settings = {
-  // Basic Identity
+  // Arcane Identity
   packname: "Tenebri",
   author: "Midknight Mantra",
   botName: "Tenebri",
 
-  // Ownership
+  // Dominion of the Void
   botOwner: "Midknight Mantra",
-  ownerNumber: process.env.OWNER_NUMBER || "254758925674", // fallback if .env missing
+  ownerNumber: process.env.OWNER_NUMBER || "254758925674", // Fallback if the shadows hide the .env
 
-  // API Keys (never commit real ones)
+  // Forbidden Keys (Guard them well, lest the abyss claim them)
   giphyApiKey: process.env.GIPHY_API_KEY || "qnl7ssQChTdPjsKta2Ax2LMaGXz303tq",
 
-  // Operational Mode
-  commandMode: process.env.COMMAND_MODE || "public", // "public" | "private" | "admin-only"
+  // Vigilant Operations
+  commandMode: process.env.COMMAND_MODE || "public", // "public" | "private" | "admin-only" — Choose your realm wisely
   maxStoreMessages: 20,
-  storeWriteInterval: 10000, // in ms
+  storeWriteInterval: 10000, // In milliseconds, the rhythm of shadowed archives
 
-  // Meta
+  // Lore of the Sentinel
   description:
-    "In the silence of the void, he found the truth—cold, cruel, and inevitable.",
-  version: "1.6.1",
+    "Forged in the abyss, Tenebri rises — brave sentinel of shadows, wielding unyielding truth against the void's cruel embrace.",
+  version: "1.6.4",
   updateZipUrl:
     "https://github.com/MidknightMantra/Tenebri/archive/refs/heads/main.zip",
 
-  // Theming & Persona
+  // Shadows & Essences — Infuse the theme with dark valor
   theme: {
     emoji: {
       skull: "💀",
       candle: "🕯️",
       raven: "🪶",
       eye: "👁️",
+      sword: "⚔️", // Added for brave theme
+      moon: "🌑", // Enhanced spooky essence
     },
     palette: {
-      primary: "#0a0a0a",
-      accent: "#3a8296",
-      blood: "#8b0000",
+      primary: "#0a0a0a", // Eternal void
+      accent: "#3a8296", // Mystic fog
+      blood: "#8b0000", // Crimson valor
     },
     tone: {
-      greet: "🕯️ Greetings, wanderer. The void acknowledges you.",
-      farewell: "💀 The night reclaims your presence.",
-      error: "👁️ The ritual faltered. Try again, mortal.",
+      greet: "🕯️ Hail, brave wanderer. The abyss stirs at your call.",
+      farewell: "⚔️ The shadows reclaim you. Until the next dawnless eve.",
+      error: "👁️ A curse upon the rite! Invoke again, undaunted soul.",
     },
   },
 
-  // Personality toggles — adapt Tenebri’s behavior or tone
+  // Essence Toggles — Shape Tenebri’s spirit in the forge of night
   persona: {
-    aggressive: false, // if true, uses sharper, commanding tone
-    poetic: true, // if true, uses lore-infused lines
-    silentMode: false, // when true, suppresses non-essential messages
+    aggressive: false, // If true, commands with fierce, unyielding tone
+    poetic: true, // If true, weaves responses with ancient lore and verse
+    silentMode: false, // If true, whispers only the essentials, cloaked in mystery
+    braveMode: true, // New: Enables motivational, courageous phrasing in replies
   },
 };
 

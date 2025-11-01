@@ -1,7 +1,7 @@
 {
   "name": "tenebri",
-  "version": "1.5.0",
-  "description": "🕯️ In the silence of the void, he found the truth — cold, cruel, and inevitable.",
+  "version": "1.6.4",
+  "description": "🕯️ In the eternal shadows, Tenebri awakens — brave, spooky, and bound to the void's unyielding truth.",
   "main": "index.js",
   "type": "commonjs",
   "scripts": {
@@ -18,7 +18,7 @@
     "check": "npm run lint && npm audit",
     "docker:build": "docker build -t tenebri .",
     "docker:run": "docker run --env-file .env -e SESSION_ID=$SESSION_ID tenebri",
-    "test": "echo \"🦇 No formal tests yet — Tenebri learns by shadow.\" && exit 0"
+    "test": "echo \"🌑⚔️ No trials yet — Tenebri tests in the abyss of shadows.\" && exit 0"
   },
   "keywords": [
     "whatsapp-bot",
@@ -27,8 +27,10 @@
     "automation",
     "tenebri",
     "dark-theme",
+    "spooky-bot",
+    "brave-automation",
     "midknightmantra",
-    "spooky-ai"
+    "void-sentinel"
   ],
   "author": "MidknightMantra",
   "license": "MIT",
