@@ -18,7 +18,6 @@ It’s designed to help admins efficiently manage WhatsApp groups.
 
 ---
 
-
 ## 🚀 Steps to Deploy
 
 ### 🪄 Step 1: Fork the Repository
@@ -58,7 +57,6 @@ Upload it to the **`/session`** folder in your project directory.
 
 ---
 
-
 ### 🚀 Step 3: Deploy Now
 
 For further customization and setup guidance, click one of the buttons below:
@@ -97,16 +95,15 @@ For further customization and setup guidance, click one of the buttons below:
 
 ---
 
-
 ## ⚙️ Features
 
-- 🧩 **Tag all group members** with the `.tagall` command  
-- 👑 **Admin-restricted usage** — only group admins can access certain commands  
-- 🎮 **Interactive games** like Tic-Tac-Toe for fun group engagement  
-- 🗣️ **Text-to-Speech** with the `.tts` command  
-- 🖼️ **Sticker creation** using `.sticker`  
-- 🔗 **Anti-link detection** to maintain group safety  
-- ⚠️ **Warn and manage members** with admin-level control  
+- 🧩 **Tag all group members** with the `.tagall` command
+- 👑 **Admin-restricted usage** — only group admins can access certain commands
+- 🎮 **Interactive games** like Tic-Tac-Toe for fun group engagement
+- 🗣️ **Text-to-Speech** with the `.tts` command
+- 🖼️ **Sticker creation** using `.sticker`
+- 🔗 **Anti-link detection** to maintain group safety
+- ⚠️ **Warn and manage members** with admin-level control
 
 ---
 
@@ -116,10 +113,11 @@ For further customization and setup guidance, click one of the buttons below:
 It leverages the powerful **[Baileys](https://github.com/WhiskeySockets/Baileys)** library to interact with the WhatsApp Web API, ensuring seamless performance and reliability.
 
 Built for simplicity and speed:
-- ⚡ Lightweight and easy to deploy  
-- 🧠 Fully customizable — extend with your own commands  
-- 🔐 Secure authentication using **QR code or pair code**  
-- 💻 Runs in a **Node.js environment** for stability and scalability  
+
+- ⚡ Lightweight and easy to deploy
+- 🧠 Fully customizable — extend with your own commands
+- 🔐 Secure authentication using **QR code or pair code**
+- 💻 Runs in a **Node.js environment** for stability and scalability
 
 ---
 
@@ -141,27 +139,27 @@ Before you begin, ensure you have the following installed on your system:
 
 1. **Clone the repository**
 
-    ```bash
-    git clone https://github.com/MidknightMantra/Tenebri.git
-    cd Tenebri
-    ```
+   ```bash
+   git clone https://github.com/MidknightMantra/Tenebri.git
+   cd Tenebri
+   ```
 
 2. **Install dependencies**
 
-    ```bash
-    npm install
-    ```
+   ```bash
+   npm install
+   ```
 
 3. **Run the bot**
 
-    ```bash
-    node index.js
-    ```
+   ```bash
+   node index.js
+   ```
 
 4. **Link your WhatsApp**
 
-    Once the bot starts, a **QR code** (or **pair code**) will appear in the terminal.  
-    Scan it using **WhatsApp → Linked Devices → Link a Device** to connect your account.
+   Once the bot starts, a **QR code** (or **pair code**) will appear in the terminal.  
+   Scan it using **WhatsApp → Linked Devices → Link a Device** to connect your account.
 
 ---
 
@@ -199,14 +197,14 @@ Your support helps the project grow and motivates further development.
 
 Special thanks to the awesome developers who made **Knight Bot** possible:
 
-- 🧑‍💻 [**Midknight Mantra**](https://github.com/MidknightMantra) — Main Developer  
-- ⚙️ [**Baileys**](https://github.com/adiwajshing/Baileys) — WhatsApp Web API Library  
-- 🔐 [**Professor**](https://github.com/mruniquehacker) — Base bot 
-- 💡 [**Dgxeon**](https://github.com/Dgxeon) — Pair Code Support  
+- 🧑‍💻 [**Midknight Mantra**](https://github.com/MidknightMantra) — Main Developer
+- ⚙️ [**Baileys**](https://github.com/adiwajshing/Baileys) — WhatsApp Web API Library
+- 🔐 [**Professor**](https://github.com/mruniquehacker) — Base bot
+- 💡 [**Dgxeon**](https://github.com/Dgxeon) — Pair Code Support
 
 ---
 
-> ⚔️ *“Tenebri — automation forged with code, discipline, and precision.”*
+> ⚔️ _“Tenebri — automation forged with code, discipline, and precision.”_
 
 ## ⚠️ Important Warning
 
@@ -219,10 +217,10 @@ Special thanks to the awesome developers who made **Knight Bot** possible:
 
 ## 📝 Legal Notice
 
-- This project is **not affiliated**, **authorized**, **maintained**, **sponsored**, or **endorsed** by **WhatsApp Inc.** or any of its subsidiaries.  
-- It is an **independent and unofficial** software project.  
-- Use responsibly — **do not spam**, **do not send bulk messages**, and **do not use for illegal purposes**.  
-- The developers **assume no liability** for misuse, damage, or violations caused by the program.  
+- This project is **not affiliated**, **authorized**, **maintained**, **sponsored**, or **endorsed** by **WhatsApp Inc.** or any of its subsidiaries.
+- It is an **independent and unofficial** software project.
+- Use responsibly — **do not spam**, **do not send bulk messages**, and **do not use for illegal purposes**.
+- The developers **assume no liability** for misuse, damage, or violations caused by the program.
 
 ---
 
@@ -231,10 +229,10 @@ Special thanks to the awesome developers who made **Knight Bot** possible:
 This project is licensed under the **[MIT License](https://opensource.org/licenses/MIT)**.  
 By using this software, you agree to the following conditions:
 
-- ✅ Use it **in compliance with all applicable laws and regulations**.  
-- 🧾 Include **original license and copyright notices**.  
-- 🙏 Credit the **original authors**.  
-- 🚫 Do **not** use it for spam, malicious, or unethical purposes.  
+- ✅ Use it **in compliance with all applicable laws and regulations**.
+- 🧾 Include **original license and copyright notices**.
+- 🙏 Credit the **original authors**.
+- 🚫 Do **not** use it for spam, malicious, or unethical purposes.
 
 ---
 
@@ -243,9 +241,10 @@ By using this software, you agree to the following conditions:
 **Copyright © 2024 [Midknight Mantra](https://github.com/MidknightMantra). All rights reserved.**
 
 This project includes open-source code from various sources:
-- 🧠 [Baileys](https://github.com/WhiskeySockets/Baileys) — MIT License  
+
+- 🧠 [Baileys](https://github.com/WhiskeySockets/Baileys) — MIT License
 - 📦 Other dependencies listed in `package.json`
 
 ---
 
-> ⚔️ *Tenebri promotes responsible automation — power should always come with discipline.*
+> ⚔️ _Tenebri promotes responsible automation — power should always come with discipline._

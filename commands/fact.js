@@ -1,12 +1,12 @@
 // commands/fact.js
-const axios = require('axios');
+const axios = require("axios");
 
 module.exports = {
-  name: 'fact', // 🔹 Main command
-  alias: ['funfact', 'randomfact'], // 🔸 Command aliases
-  desc: 'Sends a random useless fact',
-  category: 'fun', // 📂 Used for help/menu organization
-  usage: '.fact',
+  name: "fact", // 🔹 Main command
+  alias: ["funfact", "randomfact"], // 🔸 Command aliases
+  desc: "Sends a random useless fact",
+  category: "fun", // 📂 Used for help/menu organization
+  usage: ".fact",
   cooldown: 5, // 🕒 Optional: 5s cooldown between uses
 
   /**
@@ -18,21 +18,25 @@ module.exports = {
   async exec(sock, m, store) {
     try {
       // 🛰️ Fetch a random fact from the API
-      const { data } = await axios.get('https://uselessfacts.jsph.pl/random.json?language=en');
-      const fact = data?.text || 'No fact available at the moment.';
+      const { data } = await axios.get(
+        "https://uselessfacts.jsph.pl/random.json?language=en",
+      );
+      const fact = data?.text || "No fact available at the moment.";
 
       // 💬 Send formatted response
       await sock.sendMessage(
         m.chat,
         { text: `💡 *Random Fact:*\n\n${fact}` },
-        { quoted: m }
+        { quoted: m },
       );
     } catch (err) {
-      console.error('❌ Error fetching fact:', err.message);
+      console.error("❌ Error fetching fact:", err.message);
       await sock.sendMessage(
         m.chat,
-        { text: '⚠️ Sorry, I could not fetch a fact right now. Please try again later.' },
-        { quoted: m }
+        {
+          text: "⚠️ Sorry, I could not fetch a fact right now. Please try again later.",
+        },
+        { quoted: m },
       );
     }
   },

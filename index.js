@@ -1,364 +1,296 @@
 /**
- * Knight Bot - A WhatsApp Bot
- * Copyright (c) 2024 Professor
- * 
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the MIT License.
- * 
- * Credits:
- * - Baileys Library by @adiwajshing
- * - Pair Code implementation inspired by TechGod143 & DGXEON
+ * ╔═══════════════════════════════════════════════╗
+ *  🕯️ Tenebri v1.6.3 — Forged in Eternal Shadows
+ *  by Midknight Mantra
+ * ╚═══════════════════════════════════════════════╝
  */
-require('./settings')
-const { Boom } = require('@hapi/boom')
-const fs = require('fs')
-const chalk = require('chalk')
-const FileType = require('file-type')
-const path = require('path')
-const axios = require('axios')
-const { handleMessages, handleGroupParticipantUpdate, handleStatus } = require('./main');
-const PhoneNumber = require('awesome-phonenumber')
-const { imageToWebp, videoToWebp, writeExifImg, writeExifVid } = require('./lib/exif')
-const { smsg, isUrl, generateMessageTag, getBuffer, getSizeMedia, fetch, await, sleep, reSize } = require('./lib/myfunc')
-const {
-    default: makeWASocket,
-    useMultiFileAuthState,
-    DisconnectReason,
-    fetchLatestBaileysVersion,
-    generateForwardMessageContent,
-    prepareWAMessageMedia,
-    generateWAMessageFromContent,
-    generateMessageID,
-    downloadContentFromMessage,
-    jidDecode,
-    proto,
-    jidNormalizedUser,
-    makeCacheableSignalKeyStore,
-    delay
-} = require("@whiskeysockets/baileys")
-const NodeCache = require("node-cache")
-// Using a lightweight persisted store instead of makeInMemoryStore (compat across versions)
-const pino = require("pino")
-const readline = require("readline")
-const { parsePhoneNumber } = require("libphonenumber-js")
-const { PHONENUMBER_MCC } = require('@whiskeysockets/baileys/lib/Utils/generics')
-const { rmSync, existsSync } = require('fs')
-const { join } = require('path')
 
-// Import lightweight store
-const store = require('./lib/lightweight_store')
+const fs = require("fs");
+const path = require("path");
+const chalk = require("chalk");
+const readline = require("readline");
+const yargs = require("yargs");
+const cluster = require("cluster");
+const cfonts = require("cfonts");
+const { say } = cfonts;
+const { join } = path;
 
-// Initialize store
-store.readFromFile()
-const settings = require('./settings')
-setInterval(() => store.writeToFile(), settings.storeWriteInterval || 10000)
+// Import for QR handling
+const QRCode = require("qrcode");
 
-// Memory optimization - Force garbage collection if available
-setInterval(() => {
-    if (global.gc) {
-        global.gc()
-        console.log('🧹 Garbage collection completed')
-    }
-}, 60_000) // every 1 minute
+// Import config
+require("./config");
+const { default: makeWASocket, useMultiFileAuthState, fetchLatestBaileysVersion, DisconnectReason, Boom } = require("@whiskeysockets/baileys");
 
-// Memory monitoring - Restart if RAM gets too high
-setInterval(() => {
-    const used = process.memoryUsage().rss / 1024 / 1024
-    if (used > 400) {
-        console.log('⚠️ RAM too high (>400MB), restarting bot...')
-        process.exit(1) // Panel will auto-restart
-    }
-}, 30_000) // check every 30 seconds
+// ===============================
+// 🧠 Globals
+// ===============================
+let isRunning = false;
+const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
 
-let phoneNumber = "911234567890"
-let owner = JSON.parse(fs.readFileSync('./data/owner.json'))
+const ask = (text) => new Promise((resolve) => rl.question(text, resolve));
 
-global.botname = "KNIGHT BOT"
-global.themeemoji = "•"
-const pairingCode = !!phoneNumber || process.argv.includes("--pairing-code")
-const useMobile = process.argv.includes("--mobile")
+// Enhanced Banner function with spooky flair
+function showBanner() {
+  console.clear();
+  say("Tenebri", {
+    font: "chrome",
+    align: "center",
+    gradient: ["#8a2be2", "#000000"],
+  });
 
-// Only create readline interface if we're in an interactive environment
-const rl = process.stdin.isTTY ? readline.createInterface({ input: process.stdin, output: process.stdout }) : null
-const question = (text) => {
-    if (rl) {
-        return new Promise((resolve) => rl.question(text, resolve))
-    } else {
-        // In non-interactive environment, use ownerNumber from settings
-        return Promise.resolve(settings.ownerNumber || phoneNumber)
-    }
+  say("Forged in Eternal Shadows — Midknight Mantra", {
+    font: "console",
+    align: "center",
+    colors: ["red"],
+  });
+
+  // Add a spooky ASCII art for theme immersion
+  console.log(chalk.magentaBright(`
+    🌑⚔️  In the depths of night, courage awakens...
+    Beware the void, for Tenebri watches. 🕯️
+  `));
 }
 
+// ===============================
+// 🕯️ Login Method Handling
+// ===============================
+async function startLauncher() {
+  showBanner();
+  console.log(chalk.yellowBright("—◉ Awakening Tenebri from the abyss...\n"));
 
-async function startXeonBotInc() {
-    let { version, isLatest } = await fetchLatestBaileysVersion()
-    const { state, saveCreds } = await useMultiFileAuthState(`./session`)
-    const msgRetryCounterCache = new NodeCache()
+  // Ensure auth folder exists
+  const authPath = path.join(__dirname, "session");
+  if (!fs.existsSync(authPath)) fs.mkdirSync(authPath, { recursive: true });
 
-    const XeonBotInc = makeWASocket({
-        version,
-        logger: pino({ level: 'silent' }),
-        printQRInTerminal: !pairingCode,
-        browser: ["Ubuntu", "Chrome", "20.0.04"],
-        auth: {
-            creds: state.creds,
-            keys: makeCacheableSignalKeyStore(state.keys, pino({ level: "fatal" }).child({ level: "fatal" })),
-        },
-        markOnlineOnConnect: true,
-        generateHighQualityLinkPreview: true,
-        syncFullHistory: true,
-        getMessage: async (key) => {
-            let jid = jidNormalizedUser(key.remoteJid)
-            let msg = await store.loadMessage(jid, key.id)
-            return msg?.message || ""
-        },
-        msgRetryCounterCache,
-        defaultQueryTimeoutMs: undefined,
-    })
+  // If creds exist, skip asking and log themed message
+  if (fs.existsSync(path.join(authPath, "creds.json"))) {
+    console.log(chalk.dim("—◉ Ancient credentials detected. Summoning the core..."));
+    startTenebriCore();
+    return;
+  }
 
-    store.bind(XeonBotInc.ev)
+  // Ask user for login method with themed prompts
+  const option = await ask(
+    chalk.yellowBright("—◉ Choose your path through the shadows (enter number only):\n") +
+      chalk.white("1. QR Code (Scan the ethereal glyph)\n2. 8-digit Text Code (Whisper the forbidden digits)\n—> ")
+  );
 
-    // Message handling
-    XeonBotInc.ev.on('messages.upsert', async chatUpdate => {
-        try {
-            const mek = chatUpdate.messages[0]
-            if (!mek.message) return
-            mek.message = (Object.keys(mek.message)[0] === 'ephemeralMessage') ? mek.message.ephemeralMessage.message : mek.message
-            if (mek.key && mek.key.remoteJid === 'status@broadcast') {
-                await handleStatus(XeonBotInc, chatUpdate);
-                return;
-            }
-            if (!XeonBotInc.public && !mek.key.fromMe && chatUpdate.type === 'notify') return
-            if (mek.key.id.startsWith('BAE5') && mek.key.id.length === 16) return
+  if (option === "2") {
+    const phone = await ask(
+      chalk.yellowBright("\n—◉ Invoke your WhatsApp number from the void:\n") +
+        chalk.white("Example: +254758925674\n—> ")
+    );
 
-            // Clear message retry cache to prevent memory bloat
-            if (XeonBotInc?.msgRetryCounterCache) {
-                XeonBotInc.msgRetryCounterCache.clear()
-            }
+    process.argv.push("--method=code");
+    process.argv.push("--phone=" + phone);
+  } else {
+    process.argv.push("--method=qr");
+  }
 
-            try {
-                await handleMessages(XeonBotInc, chatUpdate, true)
-            } catch (err) {
-                console.error("Error in handleMessages:", err)
-                // Only try to send error message if we have a valid chatId
-                if (mek.key && mek.key.remoteJid) {
-                    await XeonBotInc.sendMessage(mek.key.remoteJid, {
-                        text: '❌ An error occurred while processing your message.',
-                        contextInfo: {
-                            forwardingScore: 1,
-                            isForwarded: true,
-                            forwardedNewsletterMessageInfo: {
-                                newsletterJid: '120363161513685998@newsletter',
-                                newsletterName: 'KnightBot MD',
-                                serverMessageId: -1
-                            }
-                        }
-                    }).catch(console.error);
-                }
-            }
-        } catch (err) {
-            console.error("Error in messages.upsert:", err)
-        }
-    })
+  rl.close();
+  startTenebriCore();
+}
 
-    // Add these event handlers for better functionality
-    XeonBotInc.decodeJid = (jid) => {
-        if (!jid) return jid
-        if (/:\d+@/gi.test(jid)) {
-            let decode = jidDecode(jid) || {}
-            return decode.user && decode.server && decode.user + '@' + decode.server || jid
-        } else return jid
-    }
+// Custom themed logger without external dependencies
+function createThemedLogger(baseLevel) {
+  const levels = {
+    trace: 10,
+    debug: 20,
+    info: 30,
+    warn: 40,
+    error: 50,
+    fatal: 60,
+    silent: Infinity
+  };
 
-    XeonBotInc.ev.on('contacts.update', update => {
-        for (let contact of update) {
-            let id = XeonBotInc.decodeJid(contact.id)
-            if (store && store.contacts) store.contacts[id] = { id, name: contact.notify }
-        }
-    })
+  const currentLevel = levels[baseLevel] || levels.warn;
 
-    XeonBotInc.getName = (jid, withoutContact = false) => {
-        id = XeonBotInc.decodeJid(jid)
-        withoutContact = XeonBotInc.withoutContact || withoutContact
-        let v
-        if (id.endsWith("@g.us")) return new Promise(async (resolve) => {
-            v = store.contacts[id] || {}
-            if (!(v.name || v.subject)) v = XeonBotInc.groupMetadata(id) || {}
-            resolve(v.name || v.subject || PhoneNumber('+' + id.replace('@s.whatsapp.net', '')).getNumber('international'))
-        })
-        else v = id === '0@s.whatsapp.net' ? {
-            id,
-            name: 'WhatsApp'
-        } : id === XeonBotInc.decodeJid(XeonBotInc.user.id) ?
-            XeonBotInc.user :
-            (store.contacts[id] || {})
-        return (withoutContact ? '' : v.name) || v.subject || v.verifiedName || PhoneNumber('+' + jid.replace('@s.whatsapp.net', '')).getNumber('international')
-    }
+  return function logger(bindings = {}) {
+    const log = (levelKey, msg, extra = {}) => {
+      if (levels[levelKey] < currentLevel) return;
 
-    XeonBotInc.public = true
+      const className = bindings.class || extra.class || 'Void';
+      let color;
+      switch (levelKey) {
+        case 'trace': color = chalk.gray; break;
+        case 'debug': color = chalk.blue; break;
+        case 'info': color = chalk.cyan; break;
+        case 'warn': color = chalk.yellow; break;
+        case 'error': color = chalk.red; break;
+        case 'fatal': color = chalk.redBright; break;
+        default: color = chalk.white;
+      }
 
-    XeonBotInc.serializeM = (m) => smsg(XeonBotInc, m, store)
+      console.log(color(`—◉ [${className.toUpperCase()}] ${msg}`));
+      if (Object.keys(extra).length > 0) {
+        console.log(chalk.dim(JSON.stringify(extra, null, 2)));
+      }
+    };
 
-    // Handle pairing code
-    if (pairingCode && !XeonBotInc.authState.creds.registered) {
-        if (useMobile) throw new Error('Cannot use pairing code with mobile api')
+    return {
+      trace: (msg, extra) => log('trace', msg, extra),
+      debug: (msg, extra) => log('debug', msg, extra),
+      info: (msg, extra) => log('info', msg, extra),
+      warn: (msg, extra) => log('warn', msg, extra),
+      error: (msg, extra) => log('error', msg, extra),
+      fatal: (msg, extra) => log('fatal', msg, extra),
+      level: baseLevel,
+      child: (newBindings) => createThemedLogger(baseLevel)({ ...bindings, ...newBindings })
+    };
+  };
+}
 
-        let phoneNumber
-        if (!!global.phoneNumber) {
-            phoneNumber = global.phoneNumber
+// ===============================
+// 🕯️ Core Bot Starter
+// ===============================
+async function startTenebriCore() {
+  if (isRunning) return;
+  isRunning = true;
+
+  const pairingCode = process.argv.includes("--method=code");
+  const qrMode = process.argv.includes("--method=qr");
+  const phoneArg = process.argv.find((a) => a.startsWith("--phone="));
+  const phoneNumber = phoneArg ? phoneArg.split("=")[1] : null;
+
+  // Parse args for logging level
+  const args = yargs.argv;
+  const logLevel = args.verbose ? 'debug' : (args.quiet ? 'silent' : 'warn');
+
+  try {
+    const { state, saveCreds } = await useMultiFileAuthState("./session");
+    const { version } = await fetchLatestBaileysVersion();
+
+    // Create themed logger
+    const logger = createThemedLogger(logLevel)();
+
+    const conn = makeWASocket({
+      auth: state,
+      browser: ["Tenebri", "Chrome", "1.6.3"],
+      version,
+      logger, // Use custom themed logger
+      getMessage: async (key) => {
+        // Optional: For message retrieval if needed for resends, etc.
+        return { conversation: "Echo from the void..." };
+      },
+    });
+
+    // Handle connection updates for QR and status (enhanced for deprecation)
+    conn.ev.on("connection.update", async (update) => {
+      const { connection, lastDisconnect, qr } = update;
+
+      if (qr) {
+        console.log(chalk.yellowBright("\n—◉ Behold the ethereal glyph from the void:"));
+        console.log(await QRCode.toString(qr, { type: "terminal", small: true }));
+        console.log(chalk.dim("—◉ Scan this arcane symbol with your WhatsApp app to bind Tenebri."));
+      }
+
+      if (connection === "close") {
+        const shouldReconnect = (lastDisconnect?.error instanceof Boom)?.output?.statusCode !== DisconnectReason.loggedOut;
+        console.log(chalk.redBright(`—◉ Connection severed from the shadows: ${lastDisconnect?.error?.message || "Unknown curse"}`));
+        if (shouldReconnect) {
+          console.log(chalk.yellowBright("—◉ Resurrecting the bond..."));
+          startTenebriCore(); // Recursive restart for reliability
         } else {
-            phoneNumber = await question(chalk.bgBlack(chalk.greenBright(`Please type your WhatsApp number 😍\nFormat: 6281376552730 (without + or spaces) : `)))
+          console.log(chalk.redBright("—◉ The bond is broken. Purge the session folder and summon anew."));
+          process.exit(0);
         }
+      } else if (connection === "open") {
+        console.log(chalk.greenBright("—◉ Tenebri is bound to your essence! The void obeys."));
+        console.log(chalk.dim("—◉ Syncing ancient whispers and shadows..."));
+      }
+    });
 
-        // Clean the phone number - remove any non-digit characters
-        phoneNumber = phoneNumber.replace(/[^0-9]/g, '')
-
-        // Validate the phone number using awesome-phonenumber
-        const pn = require('awesome-phonenumber');
-        if (!pn('+' + phoneNumber).isValid()) {
-            console.log(chalk.red('Invalid phone number. Please enter your full international number (e.g., 15551234567 for US, 447911123456 for UK, etc.) without + or spaces.'));
-            process.exit(1);
+    // Text Pairing Code with themed output
+    if (pairingCode && phoneNumber && !conn.authState.creds.registered) {
+      setTimeout(async () => {
+        try {
+          const code = await conn.requestPairingCode(phoneNumber);
+          console.log(chalk.yellowBright(`\n—◉ Arcane pairing code for ${phoneNumber} revealed:\n`));
+          console.log(chalk.greenBright(`   ${code}\n`));
+          console.log(
+            chalk.dim(
+              "—◉ Bind this code in WhatsApp → Linked Devices → Link with phone number. The shadows await."
+            )
+          );
+        } catch (err) {
+          console.error(chalk.red("—◉ Curse upon the void! Failed to summon pairing code:"), err);
         }
-
-        setTimeout(async () => {
-            try {
-                let code = await XeonBotInc.requestPairingCode(phoneNumber)
-                code = code?.match(/.{1,4}/g)?.join("-") || code
-                console.log(chalk.black(chalk.bgGreen(`Your Pairing Code : `)), chalk.black(chalk.white(code)))
-                console.log(chalk.yellow(`\nPlease enter this code in your WhatsApp app:\n1. Open WhatsApp\n2. Go to Settings > Linked Devices\n3. Tap "Link a Device"\n4. Enter the code shown above`))
-            } catch (error) {
-                console.error('Error requesting pairing code:', error)
-                console.log(chalk.red('Failed to get pairing code. Please check your phone number and try again.'))
-            }
-        }, 3000)
+      }, 2000);
     }
 
-    // Connection handling
-    XeonBotInc.ev.on('connection.update', async (s) => {
-        const { connection, lastDisconnect } = s
-        if (connection == "open") {
-            console.log(chalk.magenta(` `))
-            console.log(chalk.yellow(`🌿Connected to => ` + JSON.stringify(XeonBotInc.user, null, 2)))
+    // Load Tenebri core handlers
+    const { handleMessages, handleGroupParticipantUpdate, handleStatus } = require("./main");
 
-            const botNumber = XeonBotInc.user.id.split(':')[0] + '@s.whatsapp.net';
-            await XeonBotInc.sendMessage(botNumber, {
-                text: `🤖 Bot Connected Successfully!\n\n⏰ Time: ${new Date().toLocaleString()}\n✅ Status: Online and Ready!
-                \n✅Make sure to join below channel`,
-                contextInfo: {
-                    forwardingScore: 1,
-                    isForwarded: true,
-                    forwardedNewsletterMessageInfo: {
-                        newsletterJid: '120363161513685998@newsletter',
-                        newsletterName: 'KnightBot MD',
-                        serverMessageId: -1
-                    }
-                }
-            });
+    // Attach handlers with themed logging
+    conn.ev.on("messages.upsert", (m) => {
+      console.log(chalk.dim("—◉ Whispers from the ether detected..."));
+      handleMessages(conn, m, true);
+    });
+    conn.ev.on("group-participants.update", (u) => {
+      console.log(chalk.dim("—◉ Shadows shift in the gathering..."));
+      handleGroupParticipantUpdate(conn, u);
+    });
+    conn.ev.on("presence.update", (s) => {
+      console.log(chalk.dim("—◉ A presence stirs in the darkness..."));
+      handleStatus(conn, s);
+    });
+    conn.ev.on("creds.update", saveCreds);
 
-            await delay(1999)
-            console.log(chalk.yellow(`\n\n                  ${chalk.bold.blue(`[ ${global.botname || 'KNIGHT BOT'} ]`)}\n\n`))
-            console.log(chalk.cyan(`< ================================================== >`))
-            console.log(chalk.magenta(`\n${global.themeemoji || '•'} YT CHANNEL: MR UNIQUE HACKER`))
-            console.log(chalk.magenta(`${global.themeemoji || '•'} GITHUB: mrunqiuehacker`))
-            console.log(chalk.magenta(`${global.themeemoji || '•'} WA NUMBER: ${owner}`))
-            console.log(chalk.magenta(`${global.themeemoji || '•'} CREDIT: MR UNIQUE HACKER`))
-            console.log(chalk.green(`${global.themeemoji || '•'} 🤖 Bot Connected Successfully! ✅`))
-            console.log(chalk.blue(`Bot Version: ${settings.version}`))
-        }
-        if (connection === 'close') {
-            const statusCode = lastDisconnect?.error?.output?.statusCode
-            if (statusCode === DisconnectReason.loggedOut || statusCode === 401) {
-                try {
-                    rmSync('./session', { recursive: true, force: true })
-                } catch { }
-                console.log(chalk.red('Session logged out. Please re-authenticate.'))
-                startXeonBotInc()
-            } else {
-                startXeonBotInc()
-            }
-        }
-    })
-
-    // Track recently-notified callers to avoid spamming messages
-    const antiCallNotified = new Set();
-
-    // Anticall handler: block callers when enabled
-    XeonBotInc.ev.on('call', async (calls) => {
-        try {
-            const { readState: readAnticallState } = require('./commands/anticall');
-            const state = readAnticallState();
-            if (!state.enabled) return;
-            for (const call of calls) {
-                const callerJid = call.from || call.peerJid || call.chatId;
-                if (!callerJid) continue;
-                try {
-                    // First: attempt to reject the call if supported
-                    try {
-                        if (typeof XeonBotInc.rejectCall === 'function' && call.id) {
-                            await XeonBotInc.rejectCall(call.id, callerJid);
-                        } else if (typeof XeonBotInc.sendCallOfferAck === 'function' && call.id) {
-                            await XeonBotInc.sendCallOfferAck(call.id, callerJid, 'reject');
-                        }
-                    } catch {}
-
-                    // Notify the caller only once within a short window
-                    if (!antiCallNotified.has(callerJid)) {
-                        antiCallNotified.add(callerJid);
-                        setTimeout(() => antiCallNotified.delete(callerJid), 60000);
-                        await XeonBotInc.sendMessage(callerJid, { text: '📵 Anticall is enabled. Your call was rejected and you will be blocked.' });
-                    }
-                } catch {}
-                // Then: block after a short delay to ensure rejection and message are processed
-                setTimeout(async () => {
-                    try { await XeonBotInc.updateBlockStatus(callerJid, 'block'); } catch {}
-                }, 800);
-            }
-        } catch (e) {
-            // ignore
-        }
+    // Additional event for chat/messages load (themed)
+    conn.ev.on("chats.set", () => {
+      console.log(chalk.dim("—◉ The gathering of souls is complete..."));
+    });
+    conn.ev.on("messages.set", () => {
+      console.log(chalk.dim("—◉ Echoes of past whispers have been archived..."));
     });
 
-    XeonBotInc.ev.on('creds.update', saveCreds)
-
-    XeonBotInc.ev.on('group-participants.update', async (update) => {
-        await handleGroupParticipantUpdate(XeonBotInc, update);
-    });
-
-    XeonBotInc.ev.on('messages.upsert', async (m) => {
-        if (m.messages[0].key && m.messages[0].key.remoteJid === 'status@broadcast') {
-            await handleStatus(XeonBotInc, m);
-        }
-    });
-
-    XeonBotInc.ev.on('status.update', async (status) => {
-        await handleStatus(XeonBotInc, status);
-    });
-
-    XeonBotInc.ev.on('messages.reaction', async (status) => {
-        await handleStatus(XeonBotInc, status);
-    });
-
-    return XeonBotInc
+    console.log(chalk.greenBright("\n🕯️ Tenebri rises from the abyss, bound and vigilant...\n"));
+  } catch (error) {
+    console.error(chalk.red("🔥 Cataclysmic error awakening Tenebri:"), error);
+    process.exit(1);
+  }
 }
 
+// ===============================
+// 🔁 Restart / Uptime Messaging
+// ===============================
+if (cluster.isPrimary) {
+  cluster.fork();
 
-// Start the bot with error handling
-startXeonBotInc().catch(error => {
-    console.error('Fatal error:', error)
-    process.exit(1)
-})
-process.on('uncaughtException', (err) => {
-    console.error('Uncaught Exception:', err)
-})
+  cluster.on("exit", (worker, code, signal) => {
+    console.log(chalk.redBright(`—◉ Tenebri's essence fades (${code || signal}). Resurrecting from the void...`));
+    setTimeout(() => cluster.fork(), 1000);
+  });
 
-process.on('unhandledRejection', (err) => {
-    console.error('Unhandled Rejection:', err)
-})
+  // Pass stdin to worker
+  rl.on("line", (line) => {
+    for (const id in cluster.workers) {
+      cluster.workers[id].send(line.trim());
+    }
+  });
+} else {
+  // Parse CLI args with yargs for better options handling (enhanced with verbose/quiet)
+  yargs
+    .option("method", {
+      describe: "Login method: qr or code",
+      type: "string",
+    })
+    .option("phone", {
+      describe: "Phone number for pairing code",
+      type: "string",
+    })
+    .option("verbose", {
+      describe: "Enable detailed logging from the shadows",
+      type: "boolean",
+      default: false,
+    })
+    .option("quiet", {
+      describe: "Silence the whispers, show only essentials",
+      type: "boolean",
+      default: false,
+    })
+    .argv;
 
-let file = require.resolve(__filename)
-fs.watchFile(file, () => {
-    fs.unwatchFile(file)
-    console.log(chalk.redBright(`Update ${__filename}`))
-    delete require.cache[file]
-    require(file)
-})
+  startLauncher();
+}

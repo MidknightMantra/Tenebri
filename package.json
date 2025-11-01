@@ -1,8 +1,9 @@
 {
   "name": "tenebri",
   "version": "1.5.0",
-  "description": "In the silence of the void, he found the truth — cold, cruel, and inevitable.",
+  "description": "🕯️ In the silence of the void, he found the truth — cold, cruel, and inevitable.",
   "main": "index.js",
+  "type": "commonjs",
   "scripts": {
     "start": "node index.js",
     "start:optimized": "node --max-old-space-size=512 --optimize-for-size --gc-interval=100 index.js",
@@ -12,19 +13,33 @@
     "start:fresh": "npm run reset-session && npm run start",
     "install:panel": "npm install --legacy-peer-deps",
     "install:force": "npm install --force",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint . --ext .js",
+    "format": "prettier --write .",
+    "check": "npm run lint && npm audit",
     "docker:build": "docker build -t tenebri .",
-    "docker:run": "docker run -e SESSION_ID=$SESSION_ID tenebri"
+    "docker:run": "docker run --env-file .env -e SESSION_ID=$SESSION_ID tenebri",
+    "test": "echo \"🦇 No formal tests yet — Tenebri learns by shadow.\" && exit 0"
   },
   "keywords": [
     "whatsapp-bot",
     "baileys",
     "multi-device",
     "automation",
-    "tenebri"
+    "tenebri",
+    "dark-theme",
+    "midknightmantra",
+    "spooky-ai"
   ],
   "author": "MidknightMantra",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MidknightMantra/Tenebri.git"
+  },
+  "bugs": {
+    "url": "https://github.com/MidknightMantra/Tenebri/issues"
+  },
+  "homepage": "https://github.com/MidknightMantra/Tenebri#readme",
   "dependencies": {
     "@adiwajshing/keyed-db": "^0.2.4",
     "@ffmpeg/ffmpeg": "^0.12.15",
@@ -33,6 +48,7 @@
     "@whiskeysockets/baileys": "v7.0.0-rc.3",
     "awesome-phonenumber": "^5.9.0",
     "axios": "^1.8.4",
+    "cfonts": "3.3.1",
     "chalk": "^4.1.2",
     "cheerio": "^1.0.0-rc.12",
     "cookie": "^0.5.0",
@@ -76,6 +92,12 @@
     "youtubedl-core": "^4.11.7",
     "yt-search": "^2.12.1",
     "ytdl-core": "^4.11.5"
+  },
+  "devDependencies": {
+    "@eslint/js": "9.39.0",
+    "eslint": "8.57.1",
+    "globals": "16.5.0",
+    "prettier": "3.6.2"
   },
   "overrides": {
     "jimp": "^1.6.0"
