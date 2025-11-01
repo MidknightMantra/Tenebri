@@ -62,7 +62,7 @@ function downloadFile(url, dest, visited = new Set()) {
         url,
         {
           headers: {
-            "User-Agent": "KnightBot-Updater/1.0",
+            "User-Agent": "Tenebri-Updater/1.0",
             Accept: "*/*",
           },
         },

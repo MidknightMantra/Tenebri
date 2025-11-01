@@ -10,7 +10,7 @@ async function playCommand(sock, chatId, message) {
 
     if (!searchQuery) {
       return await sock.sendMessage(chatId, {
-        text: "What song do you want to download?",
+        text: "🎵 *Whisper the name of the melody you seek...*",
       });
     }
 
@@ -18,13 +18,13 @@ async function playCommand(sock, chatId, message) {
     const { videos } = await yts(searchQuery);
     if (!videos || videos.length === 0) {
       return await sock.sendMessage(chatId, {
-        text: "No songs found!",
+        text: "🌑 *The void yields no such melody...*\n\n_Try another incantation._",
       });
     }
 
     // Send loading message
     await sock.sendMessage(chatId, {
-      text: "_Please wait your download is in progress_",
+      text: "🕯️ *Summoning the song from the abyss...*\n\n_The shadows work their magic..._",
     });
 
     // Get the first video result
@@ -39,32 +39,38 @@ async function playCommand(sock, chatId, message) {
 
     if (!data || !data.status || !data.result || !data.result.downloadUrl) {
       return await sock.sendMessage(chatId, {
-        text: "Failed to fetch audio from the API. Please try again later.",
+        text: "💀 *The melody escaped the void's grasp...*\n\n_The API spirits remain silent._",
       });
     }
 
     const audioUrl = data.result.downloadUrl;
     const title = data.result.title;
 
-    // Send the audio
-    await sock.sendMessage(
-      chatId,
-      {
-        audio: { url: audioUrl },
-        mimetype: "audio/mpeg",
-        fileName: `${title}.mp3`,
-      },
-      { quoted: message },
-    );
+    // Send the audio with better error handling
+    try {
+      await sock.sendMessage(
+        chatId,
+        {
+          audio: { url: audioUrl },
+          mimetype: "audio/mpeg",
+          fileName: `${title}.mp3`,
+        },
+        { quoted: message },
+      );
+    } catch (sendError) {
+      console.error("🕯️ Audio transmission failed:", sendError.message);
+      await sock.sendMessage(chatId, {
+        text: `💀 *The melody escaped into darkness...*\n\n🎵 *Song:* ${title}\n🔗 *Link:* ${video.url}\n\n_Network spirits are restless. Try again._`,
+      });
+    }
   } catch (error) {
-    console.error("Error in song2 command:", error);
+    console.error("🌑 Play command failed:", error.message);
     await sock.sendMessage(chatId, {
-      text: "Download failed. Please try again later.",
+      text: "💀 *The shadows refuse to yield the song...*\n\n_Network connection to the void falters._",
     });
   }
 }
 
 module.exports = playCommand;
 
-/*Powered by KNIGHT-BOT*
- *Credits to Keith MD*`*/
+/*Powered by TENEBRI*/

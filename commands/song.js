@@ -4,12 +4,13 @@ const fs = require("fs");
 const path = require("path");
 
 const AXIOS_DEFAULTS = {
-  timeout: 60000,
+  timeout: 90000, // Increased timeout to 90 seconds
   headers: {
     "User-Agent":
       "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
     Accept: "application/json, text/plain, */*",
   },
+  maxRedirects: 5, // Limit redirects
 };
 
 async function tryRequest(getter, attempts = 3) {
@@ -112,21 +113,36 @@ async function songCommand(sock, chatId, message) {
       }
     }
 
-    await sock.sendMessage(
-      chatId,
-      {
-        audio: { url: audioData.download || audioData.dl || audioData.url },
-        mimetype: "audio/mpeg",
-        fileName: `${audioData.title || video.title || "song"}.mp3`,
-        ptt: false,
-      },
-      { quoted: message },
-    );
+    const downloadUrl = audioData.download || audioData.dl || audioData.url;
+    
+    // Try sending with better error handling
+    try {
+      await sock.sendMessage(
+        chatId,
+        {
+          audio: { url: downloadUrl },
+          mimetype: "audio/mpeg",
+          fileName: `${audioData.title || video.title || "song"}.mp3`,
+          ptt: false,
+        },
+        { quoted: message },
+      );
+    } catch (sendError) {
+      // If sending fails, provide more helpful error
+      console.error("🕯️ Audio transmission to the void failed:", sendError.message);
+      await sock.sendMessage(
+        chatId,
+        { 
+          text: `💀 *The melody escaped into darkness...*\n\n🎵 *Song:* ${video.title}\n🔗 *Direct link:* ${video.url}\n\n_The void's connection falters. Try again, brave soul._` 
+        },
+        { quoted: message },
+      );
+    }
   } catch (err) {
-    console.error("Song command error:", err);
+    console.error("🌑 Song command summoning failed:", err.message);
     await sock.sendMessage(
       chatId,
-      { text: "❌ Failed to download song." },
+      { text: "💀 *The shadows refuse to yield the song...*\n\n_Network spirits are restless. Invoke again shortly._" },
       { quoted: message },
     );
   }

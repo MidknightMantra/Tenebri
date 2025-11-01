@@ -12,7 +12,7 @@ async function banCommand(sock, chatId, message) {
     if (!isBotAdmin) {
       await sock.sendMessage(
         chatId,
-        { text: "Please make the bot an admin to use .ban", ...channelInfo },
+        { text: "🕯️ Tenebri must be anointed as guardian to seal fates eternally.", ...channelInfo },
         { quoted: message },
       );
       return;
@@ -20,7 +20,7 @@ async function banCommand(sock, chatId, message) {
     if (!isSenderAdmin && !message.key.fromMe) {
       await sock.sendMessage(
         chatId,
-        { text: "Only group admins can use .ban", ...channelInfo },
+        { text: "⚔️ Only realm guardians may condemn souls to eternal exile.", ...channelInfo },
         { quoted: message },
       );
       return;
@@ -55,7 +55,7 @@ async function banCommand(sock, chatId, message) {
 
   if (!userToBan) {
     await sock.sendMessage(chatId, {
-      text: "Please mention the user or reply to their message to ban!",
+      text: "👁️ Mark the cursed soul — mention or reply to seal their eternal fate.",
       ...channelInfo,
     });
     return;
@@ -70,7 +70,7 @@ async function banCommand(sock, chatId, message) {
     ) {
       await sock.sendMessage(
         chatId,
-        { text: "You cannot ban the bot account.", ...channelInfo },
+        { text: "💀 The eternal sentinel cannot be banished... Tenebri endures.", ...channelInfo },
         { quoted: message },
       );
       return;
@@ -88,13 +88,13 @@ async function banCommand(sock, chatId, message) {
       );
 
       await sock.sendMessage(chatId, {
-        text: `Successfully banned @${userToBan.split("@")[0]}!`,
+        text: `💀 @${userToBan.split("@")[0]} has been condemned to eternal exile!\n\n_The void claims another soul..._`,
         mentions: [userToBan],
         ...channelInfo,
       });
     } else {
       await sock.sendMessage(chatId, {
-        text: `${userToBan.split("@")[0]} is already banned!`,
+        text: `🕯️ @${userToBan.split("@")[0]} already dwells in darkness... eternally banished.`,
         mentions: [userToBan],
         ...channelInfo,
       });
@@ -102,7 +102,7 @@ async function banCommand(sock, chatId, message) {
   } catch (error) {
     console.error("Error in ban command:", error);
     await sock.sendMessage(chatId, {
-      text: "Failed to ban user!",
+      text: "⚔️ The exile ritual crumbles... Dark forces intervene.",
       ...channelInfo,
     });
   }

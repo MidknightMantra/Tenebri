@@ -5,7 +5,7 @@ async function demoteCommand(sock, chatId, mentionedJids, message) {
     // First check if it's a group
     if (!chatId.endsWith("@g.us")) {
       await sock.sendMessage(chatId, {
-        text: "This command can only be used in groups!",
+        text: "🌑 This rite echoes only within gatherings, not solitary whispers.",
       });
       return;
     }
@@ -20,14 +20,14 @@ async function demoteCommand(sock, chatId, mentionedJids, message) {
 
       if (!adminStatus.isBotAdmin) {
         await sock.sendMessage(chatId, {
-          text: "❌ Error: Please make the bot an admin first to use this command.",
+          text: "🕯️ Tenebri must be granted guardian powers to strip rank from the fallen.",
         });
         return;
       }
 
       if (!adminStatus.isSenderAdmin) {
         await sock.sendMessage(chatId, {
-          text: "❌ Error: Only group admins can use the demote command.",
+          text: "⚔️ Only guardians may cast down those who falter in their duty.",
         });
         return;
       }
@@ -55,7 +55,7 @@ async function demoteCommand(sock, chatId, mentionedJids, message) {
     // If no user found through either method
     if (userToDemote.length === 0) {
       await sock.sendMessage(chatId, {
-        text: "❌ Error: Please mention the user or reply to their message to demote!",
+        text: "👁️ Mark the fallen guardian — mention or reply to revoke their power.",
       });
       return;
     }
@@ -76,11 +76,12 @@ async function demoteCommand(sock, chatId, mentionedJids, message) {
     await new Promise((resolve) => setTimeout(resolve, 1000));
 
     const demotionMessage =
-      `*『 GROUP DEMOTION 』*\n\n` +
-      `👤 *Demoted User${userToDemote.length > 1 ? "s" : ""}:*\n` +
-      `${usernames.map((name) => `• ${name}`).join("\n")}\n\n` +
-      `👑 *Demoted By:* @${message.key.participant ? message.key.participant.split("@")[0] : message.key.remoteJid.split("@")[0]}\n\n` +
-      `📅 *Date:* ${new Date().toLocaleString()}`;
+      `┏━━━『 💀 𝐃𝐄𝐒𝐂𝐄𝐍𝐒𝐈𝐎𝐍 𝐑𝐈𝐓𝐄 』━━━┓\n\n` +
+      `🌑 *Fallen Guardian${userToDemote.length > 1 ? "s" : ""}:*\n` +
+      `${usernames.map((name) => `  ◈ ${name}`).join("\n")}\n\n` +
+      `⚔️ *Decreed By:* @${message.key.participant ? message.key.participant.split("@")[0] : message.key.remoteJid.split("@")[0]}\n` +
+      `📅 *Time:* ${new Date().toLocaleString()}\n\n` +
+      `_The shadows reclaim their power..._`;
 
     await sock.sendMessage(chatId, {
       text: demotionMessage,
@@ -95,7 +96,7 @@ async function demoteCommand(sock, chatId, mentionedJids, message) {
       await new Promise((resolve) => setTimeout(resolve, 2000));
       try {
         await sock.sendMessage(chatId, {
-          text: "❌ Rate limit reached. Please try again in a few seconds.",
+          text: "🕯️ The void overwhelms... Too many rituals at once. Wait, then invoke again.",
         });
       } catch (retryError) {
         console.error("Error sending retry message:", retryError);
@@ -103,7 +104,7 @@ async function demoteCommand(sock, chatId, mentionedJids, message) {
     } else {
       try {
         await sock.sendMessage(chatId, {
-          text: "❌ Failed to demote user(s). Make sure the bot is admin and has sufficient permissions.",
+          text: "💀 The demotion rite falters... Ensure Tenebri wields guardian authority.",
         });
       } catch (sendError) {
         console.error("Error sending error message:", sendError);

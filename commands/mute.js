@@ -5,7 +5,7 @@ async function muteCommand(sock, chatId, senderId, message, durationInMinutes) {
   if (!isBotAdmin) {
     await sock.sendMessage(
       chatId,
-      { text: "Please make the bot an admin first." },
+      { text: "🕯️ Tenebri must be granted guardian powers to silence the realm." },
       { quoted: message },
     );
     return;
@@ -14,7 +14,7 @@ async function muteCommand(sock, chatId, senderId, message, durationInMinutes) {
   if (!isSenderAdmin) {
     await sock.sendMessage(
       chatId,
-      { text: "Only group admins can use the mute command." },
+      { text: "⚔️ Only guardians may invoke the silence of shadows." },
       { quoted: message },
     );
     return;
@@ -28,7 +28,7 @@ async function muteCommand(sock, chatId, senderId, message, durationInMinutes) {
       const durationInMilliseconds = durationInMinutes * 60 * 1000;
       await sock.sendMessage(
         chatId,
-        { text: `The group has been muted for ${durationInMinutes} minutes.` },
+        { text: `🌑 *Silence falls upon the realm for ${durationInMinutes} minutes...*\n\n_Only guardians may speak in the void._` },
         { quoted: message },
       );
 
@@ -37,7 +37,7 @@ async function muteCommand(sock, chatId, senderId, message, durationInMinutes) {
         try {
           await sock.groupSettingUpdate(chatId, "not_announcement");
           await sock.sendMessage(chatId, {
-            text: "The group has been unmuted.",
+            text: "🕯️ The shadows recede... voices may rise once more.",
           });
         } catch (unmuteError) {
           console.error("Error unmuting group:", unmuteError);
@@ -46,7 +46,7 @@ async function muteCommand(sock, chatId, senderId, message, durationInMinutes) {
     } else {
       await sock.sendMessage(
         chatId,
-        { text: "The group has been muted." },
+        { text: "🌑 *The realm falls silent...*\n\n_Only guardians may pierce the darkness._" },
         { quoted: message },
       );
     }
@@ -55,7 +55,7 @@ async function muteCommand(sock, chatId, senderId, message, durationInMinutes) {
     await sock.sendMessage(
       chatId,
       {
-        text: "An error occurred while muting/unmuting the group. Please try again.",
+        text: "💀 The silencing ritual wavers... The void resists control.",
       },
       { quoted: message },
     );

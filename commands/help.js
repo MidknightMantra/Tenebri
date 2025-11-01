@@ -4,270 +4,267 @@ const path = require("path");
 
 async function helpCommand(sock, chatId, message) {
   const helpMessage = `
-╔═══════════════════╗
-   *🤖 ${settings.botName || "KnightBot-MD"}*  
-   Version: *${settings.version || "3.0.0"}*
-   by ${settings.botOwner || "Mr Unique Hacker"}
-   YT : ${global.ytch}
-╚═══════════════════╝
+┏━━━━━━━━━━━━━━━━━━━┓
+   *🕯️ ${settings.botName || "Tenebri"} 🕯️*  
+   ⚡ Version: *${settings.version || "1.6.4"}*
+   👤 Forged by: *${settings.botOwner || "MidknightMantra"}*
+   📺 YT: *${global.ytch}*
+┗━━━━━━━━━━━━━━━━━━━┛
 
-*Available Commands:*
+*⚔️ Invocations from the Abyss ⚔️*
 
-╔═══════════════════╗
-🌐 *General Commands*:
-║ ➤ .help or .menu
-║ ➤ .ping
-║ ➤ .alive
-║ ➤ .tts <text>
-║ ➤ .owner
-║ ➤ .joke
-║ ➤ .quote
-║ ➤ .fact
-║ ➤ .weather <city>
-║ ➤ .news
-║ ➤ .attp <text>
-║ ➤ .lyrics <song_title>
-║ ➤ .8ball <question>
-║ ➤ .groupinfo
-║ ➤ .staff or .admins 
-║ ➤ .vv
-║ ➤ .trt <text> <lang>
-║ ➤ .ss <link>
-║ ➤ .jid
-║ ➤ .url
-╚═══════════════════╝ 
+┏━━━『 🌑 *General Rites* 』
+┃ ◈ .help | .menu
+┃ ◈ .ping
+┃ ◈ .alive
+┃ ◈ .tts <text>
+┃ ◈ .owner
+┃ ◈ .joke
+┃ ◈ .quote
+┃ ◈ .fact
+┃ ◈ .weather <city>
+┃ ◈ .news
+┃ ◈ .attp <text>
+┃ ◈ .lyrics <song>
+┃ ◈ .8ball <question>
+┃ ◈ .groupinfo
+┃ ◈ .staff | .admins
+┃ ◈ .vv
+┃ ◈ .trt <text> <lang>
+┃ ◈ .ss <link>
+┃ ◈ .jid
+┃ ◈ .url
+┗━━━━━━━━━━━━━━━━━━━
 
-╔═══════════════════╗
-👮‍♂️ *Admin Commands*:
-║ ➤ .ban @user
-║ ➤ .promote @user
-║ ➤ .demote @user
-║ ➤ .mute <minutes>
-║ ➤ .unmute
-║ ➤ .delete or .del
-║ ➤ .kick @user
-║ ➤ .warnings @user
-║ ➤ .warn @user
-║ ➤ .antilink
-║ ➤ .antibadword
-║ ➤ .clear
-║ ➤ .tag <message>
-║ ➤ .tagall
-║ ➤ .tagnotadmin
-║ ➤ .hidetag <message>
-║ ➤ .chatbot
-║ ➤ .resetlink
-║ ➤ .antitag <on/off>
-║ ➤ .welcome <on/off>
-║ ➤ .goodbye <on/off>
-║ ➤ .setgdesc <description>
-║ ➤ .setgname <new name>
-║ ➤ .setgpp (reply to image)
-╚═══════════════════╝
+┏━━━『 ⚔️ *Guardian Commands* 』
+┃ ◈ .ban @user
+┃ ◈ .promote @user
+┃ ◈ .demote @user
+┃ ◈ .mute <minutes>
+┃ ◈ .unmute
+┃ ◈ .delete | .del
+┃ ◈ .kick @user
+┃ ◈ .warnings @user
+┃ ◈ .warn @user
+┃ ◈ .antilink
+┃ ◈ .antibadword
+┃ ◈ .clear
+┃ ◈ .tag <message>
+┃ ◈ .tagall
+┃ ◈ .tagnotadmin
+┃ ◈ .hidetag <message>
+┃ ◈ .chatbot
+┃ ◈ .resetlink
+┃ ◈ .antitag <on/off>
+┃ ◈ .welcome <on/off>
+┃ ◈ .goodbye <on/off>
+┃ ◈ .setgdesc <desc>
+┃ ◈ .setgname <name>
+┃ ◈ .setgpp (reply)
+┗━━━━━━━━━━━━━━━━━━━
 
-╔═══════════════════╗
-🔒 *Owner Commands*:
-║ ➤ .mode <public/private>
-║ ➤ .clearsession
-║ ➤ .antidelete
-║ ➤ .cleartmp
-║ ➤ .update
-║ ➤ .settings
-║ ➤ .setpp <reply to image>
-║ ➤ .autoreact <on/off>
-║ ➤ .autostatus <on/off>
-║ ➤ .autostatus react <on/off>
-║ ➤ .autotyping <on/off>
-║ ➤ .autoread <on/off>
-║ ➤ .anticall <on/off>
-║ ➤ .pmblocker <on/off/status>
-║ ➤ .pmblocker setmsg <text>
-║ ➤ .setmention <reply to msg>
-║ ➤ .mention <on/off>
-╚═══════════════════╝
+┏━━━『 💀 *Sovereign Rites* 』
+┃ ◈ .mode <public/private>
+┃ ◈ .clearsession
+┃ ◈ .antidelete
+┃ ◈ .cleartmp
+┃ ◈ .update
+┃ ◈ .settings
+┃ ◈ .setpp (reply)
+┃ ◈ .autoreact <on/off>
+┃ ◈ .autostatus <on/off>
+┃ ◈ .autostatus react <on/off>
+┃ ◈ .autotyping <on/off>
+┃ ◈ .autoread <on/off>
+┃ ◈ .anticall <on/off>
+┃ ◈ .pmblocker <on/off/status>
+┃ ◈ .pmblocker setmsg <text>
+┃ ◈ .setmention (reply)
+┃ ◈ .mention <on/off>
+┗━━━━━━━━━━━━━━━━━━━
 
-╔═══════════════════╗
-🎨 *Image/Sticker Commands*:
-║ ➤ .blur <image>
-║ ➤ .simage <reply to sticker>
-║ ➤ .sticker <reply to image>
-║ ➤ .removebg
-║ ➤ .remini
-║ ➤ .crop <reply to image>
-║ ➤ .tgsticker <Link>
-║ ➤ .meme
-║ ➤ .take <packname> 
-║ ➤ .emojimix <emj1>+<emj2>
-║ ➤ .igs <insta link>
-║ ➤ .igsc <insta link>
-╚═══════════════════╝  
+┏━━━『 🎨 *Shadow Arts* 』
+┃ ◈ .blur <image>
+┃ ◈ .simage (reply)
+┃ ◈ .sticker (reply)
+┃ ◈ .removebg
+┃ ◈ .remini
+┃ ◈ .crop (reply)
+┃ ◈ .tgsticker <link>
+┃ ◈ .meme
+┃ ◈ .take <packname>
+┃ ◈ .emojimix <emj1>+<emj2>
+┃ ◈ .igs <insta link>
+┃ ◈ .igsc <insta link>
+┗━━━━━━━━━━━━━━━━━━━
 
-╔═══════════════════╗
-🖼️ *Pies Commands*:
-║ ➤ .pies <country>
-║ ➤ .china 
-║ ➤ .indonesia 
-║ ➤ .japan 
-║ ➤ .korea 
-║ ➤ .hijab
-╚═══════════════════╝
+┏━━━『 🖼️ *Pies Summons* 』
+┃ ◈ .pies <country>
+┃ ◈ .china
+┃ ◈ .indonesia
+┃ ◈ .japan
+┃ ◈ .korea
+┃ ◈ .hijab
+┗━━━━━━━━━━━━━━━━━━━
 
-╔═══════════════════╗
-🎮 *Game Commands*:
-║ ➤ .tictactoe @user
-║ ➤ .hangman
-║ ➤ .guess <letter>
-║ ➤ .trivia
-║ ➤ .answer <answer>
-║ ➤ .truth
-║ ➤ .dare
-╚═══════════════════╝
+┏━━━『 🎮 *Trials of the Void* 』
+┃ ◈ .tictactoe @user
+┃ ◈ .hangman
+┃ ◈ .guess <letter>
+┃ ◈ .trivia
+┃ ◈ .answer <answer>
+┃ ◈ .truth
+┃ ◈ .dare
+┗━━━━━━━━━━━━━━━━━━━
 
-╔═══════════════════╗
-🤖 *AI Commands*:
-║ ➤ .gpt <question>
-║ ➤ .gemini <question>
-║ ➤ .imagine <prompt>
-║ ➤ .flux <prompt>
-║ ➤ .sora <prompt>
-╚═══════════════════╝
+┏━━━『 🧠 *Arcane Intelligence* 』
+┃ ◈ .gpt <question>
+┃ ◈ .gemini <question>
+┃ ◈ .imagine <prompt>
+┃ ◈ .flux <prompt>
+┃ ◈ .sora <prompt>
+┗━━━━━━━━━━━━━━━━━━━
 
-╔═══════════════════╗
-🎯 *Fun Commands*:
-║ ➤ .compliment @user
-║ ➤ .insult @user
-║ ➤ .flirt 
-║ ➤ .shayari
-║ ➤ .goodnight
-║ ➤ .roseday
-║ ➤ .character @user
-║ ➤ .wasted @user
-║ ➤ .ship @user
-║ ➤ .simp @user
-║ ➤ .stupid @user [text]
-╚═══════════════════╝
+┏━━━『 🎭 *Dark Amusements* 』
+┃ ◈ .compliment @user
+┃ ◈ .insult @user
+┃ ◈ .flirt
+┃ ◈ .shayari
+┃ ◈ .goodnight
+┃ ◈ .roseday
+┃ ◈ .character @user
+┃ ◈ .wasted @user
+┃ ◈ .ship @user
+┃ ◈ .simp @user
+┃ ◈ .stupid @user [text]
+┗━━━━━━━━━━━━━━━━━━━
 
-╔═══════════════════╗
-🔤 *Textmaker*:
-║ ➤ .metallic <text>
-║ ➤ .ice <text>
-║ ➤ .snow <text>
-║ ➤ .impressive <text>
-║ ➤ .matrix <text>
-║ ➤ .light <text>
-║ ➤ .neon <text>
-║ ➤ .devil <text>
-║ ➤ .purple <text>
-║ ➤ .thunder <text>
-║ ➤ .leaves <text>
-║ ➤ .1917 <text>
-║ ➤ .arena <text>
-║ ➤ .hacker <text>
-║ ➤ .sand <text>
-║ ➤ .blackpink <text>
-║ ➤ .glitch <text>
-║ ➤ .fire <text>
-╚═══════════════════╝
+┏━━━『 ✍️ *Runic Inscriptions* 』
+┃ ◈ .metallic <text>
+┃ ◈ .ice <text>
+┃ ◈ .snow <text>
+┃ ◈ .impressive <text>
+┃ ◈ .matrix <text>
+┃ ◈ .light <text>
+┃ ◈ .neon <text>
+┃ ◈ .devil <text>
+┃ ◈ .purple <text>
+┃ ◈ .thunder <text>
+┃ ◈ .leaves <text>
+┃ ◈ .1917 <text>
+┃ ◈ .arena <text>
+┃ ◈ .hacker <text>
+┃ ◈ .sand <text>
+┃ ◈ .blackpink <text>
+┃ ◈ .glitch <text>
+┃ ◈ .fire <text>
+┗━━━━━━━━━━━━━━━━━━━
 
-╔═══════════════════╗
-📥 *Downloader*:
-║ ➤ .play <song_name>
-║ ➤ .song <song_name>
-║ ➤ .spotify <query>
-║ ➤ .instagram <link>
-║ ➤ .facebook <link>
-║ ➤ .tiktok <link>
-║ ➤ .video <song name>
-║ ➤ .ytmp4 <Link>
-╚═══════════════════╝
+┏━━━『 📥 *Void Harvester* 』
+┃ ◈ .play <song>
+┃ ◈ .song <song>
+┃ ◈ .spotify <query>
+┃ ◈ .instagram <link>
+┃ ◈ .facebook <link>
+┃ ◈ .tiktok <link>
+┃ ◈ .video <song>
+┃ ◈ .ytmp4 <link>
+┗━━━━━━━━━━━━━━━━━━━
 
-╔═══════════════════╗
-🧩 *MISC*:
-║ ➤ .heart
-║ ➤ .horny
-║ ➤ .circle
-║ ➤ .lgbt
-║ ➤ .lolice
-║ ➤ .its-so-stupid
-║ ➤ .namecard 
-║ ➤ .oogway
-║ ➤ .tweet
-║ ➤ .ytcomment 
-║ ➤ .comrade 
-║ ➤ .gay 
-║ ➤ .glass 
-║ ➤ .jail 
-║ ➤ .passed 
-║ ➤ .triggered
-╚═══════════════════╝
+┏━━━『 🌀 *Miscellaneous Dark Arts* 』
+┃ ◈ .heart
+┃ ◈ .horny
+┃ ◈ .circle
+┃ ◈ .lgbt
+┃ ◈ .lolice
+┃ ◈ .its-so-stupid
+┃ ◈ .namecard
+┃ ◈ .oogway
+┃ ◈ .tweet
+┃ ◈ .ytcomment
+┃ ◈ .comrade
+┃ ◈ .gay
+┃ ◈ .glass
+┃ ◈ .jail
+┃ ◈ .passed
+┃ ◈ .triggered
+┗━━━━━━━━━━━━━━━━━━━
 
-╔═══════════════════╗
-🖼️ *ANIME*:
-║ ➤ .neko
-║ ➤ .waifu
-║ ➤ .loli
-║ ➤ .nom 
-║ ➤ .poke 
-║ ➤ .cry 
-║ ➤ .kiss 
-║ ➤ .pat 
-║ ➤ .hug 
-║ ➤ .wink 
-║ ➤ .facepalm 
-╚═══════════════════╝
+┏━━━『 🌸 *Anime Realm* 』
+┃ ◈ .neko
+┃ ◈ .waifu
+┃ ◈ .loli
+┃ ◈ .nom
+┃ ◈ .poke
+┃ ◈ .cry
+┃ ◈ .kiss
+┃ ◈ .pat
+┃ ◈ .hug
+┃ ◈ .wink
+┃ ◈ .facepalm
+┗━━━━━━━━━━━━━━━━━━━
 
-╔═══════════════════╗
-💻 *Github Commands:*
-║ ➤ .git
-║ ➤ .github
-║ ➤ .sc
-║ ➤ .script
-║ ➤ .repo
-╚═══════════════════╝
+┏━━━『 💻 *Source Codex* 』
+┃ ◈ .git | .github
+┃ ◈ .sc | .script
+┃ ◈ .repo
+┗━━━━━━━━━━━━━━━━━━━
 
-Join our channel for updates:`;
+*🕯️ Whisper to the shadows for more...*`;
 
   try {
     const imagePath = path.join(__dirname, "../assets/bot_image.jpg");
 
+    // Try to send with image first
     if (fs.existsSync(imagePath)) {
-      const imageBuffer = fs.readFileSync(imagePath);
+      try {
+        const imageBuffer = fs.readFileSync(imagePath);
 
-      await sock.sendMessage(
-        chatId,
-        {
-          image: imageBuffer,
-          caption: helpMessage,
-          contextInfo: {
-            forwardingScore: 1,
-            isForwarded: true,
-            forwardedNewsletterMessageInfo: {
-              newsletterJid: "120363161513685998@newsletter",
-              newsletterName: "KnightBot MD",
-              serverMessageId: -1,
+        await sock.sendMessage(
+          chatId,
+          {
+            image: imageBuffer,
+            caption: helpMessage,
+            contextInfo: {
+              forwardingScore: 1,
+              isForwarded: true,
+              forwardedNewsletterMessageInfo: {
+                newsletterJid: "0029Vb74Dlf4CrfoqpAEBC2T@newsletter",
+                newsletterName: "Tenebri",
+                serverMessageId: -1,
+              },
             },
           },
-        },
-        { quoted: message },
-      );
-    } else {
-      console.error("Bot image not found at:", imagePath);
-      await sock.sendMessage(chatId, {
-        text: helpMessage,
-        contextInfo: {
-          forwardingScore: 1,
-          isForwarded: true,
-          forwardedNewsletterMessageInfo: {
-            newsletterJid: "120363161513685998@newsletter",
-            newsletterName: "KnightBot MD by Mr Unique Hacker",
-            serverMessageId: -1,
-          },
-        },
-      });
+          { quoted: message },
+        );
+        return; // Success, exit function
+      } catch (imageError) {
+        // Image upload failed, fall through to text-only
+        console.error("🕯️ Image upload to the void failed, sending text only:", imageError.message);
+      }
     }
+
+    // Fallback: Send text-only message
+    await sock.sendMessage(chatId, {
+      text: helpMessage,
+      contextInfo: {
+        forwardingScore: 1,
+        isForwarded: true,
+        forwardedNewsletterMessageInfo: {
+          newsletterJid: "0029Vb74Dlf4CrfoqpAEBC2T@newsletter",
+          newsletterName: "Tenebri by Midknight Mantra",
+          serverMessageId: -1,
+        },
+      },
+    });
   } catch (error) {
-    console.error("Error in help command:", error);
-    await sock.sendMessage(chatId, { text: helpMessage });
+    // Final fallback: bare text message
+    console.error("💀 Error in help command:", error);
+    try {
+      await sock.sendMessage(chatId, { text: helpMessage });
+    } catch (finalError) {
+      console.error("⚔️ Complete failure in help command:", finalError);
+    }
   }
 }
 

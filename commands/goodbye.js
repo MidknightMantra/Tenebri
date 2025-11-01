@@ -71,7 +71,7 @@ async function handleLeaveEvent(sock, id, participants) {
           .replace(/{group}/g, groupName);
       } else {
         // Default message if no custom message is set
-        finalMessage = ` *@${displayName}* we will never miss you! `;
+        finalMessage = `┏━━━『 💀 𝐀 𝐒𝐎𝐔𝐋 𝐃𝐄𝐏𝐀𝐑𝐓𝐒 』━━━┓\n\n🌑 *@${displayName}* fades into the eternal void...\n\n_The shadows reclaim what once walked among us._\n_May the darkness guide your path._\n\n⚔️ ~Tenebri watches as souls come and go~`;
       }
 
       // Try to send with image first (always try images)

@@ -14,13 +14,13 @@ async function truthCommand(sock, chatId, message) {
     const json = await res.json();
     const truthMessage = json.result;
 
-    // Send the truth message
-    await sock.sendMessage(chatId, { text: truthMessage }, { quoted: message });
+    // Send the truth message with dark mystique
+    await sock.sendMessage(chatId, { text: `👁️ *The Abyss Demands Honesty*\n\n${truthMessage}\n\n_Speak true, or face the shadows..._` }, { quoted: message });
   } catch (error) {
     console.error("Error in truth command:", error);
     await sock.sendMessage(
       chatId,
-      { text: "❌ Failed to get truth. Please try again later!" },
+      { text: "🕯️ The truth-seeker vanishes into mist... Summon them once more." },
       { quoted: message },
     );
   }

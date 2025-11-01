@@ -41,8 +41,8 @@ async function stickerCommand(sock, chatId, message) {
           forwardingScore: 999,
           isForwarded: true,
           forwardedNewsletterMessageInfo: {
-            newsletterJid: "120363161513685998@newsletter",
-            newsletterName: "KnightBot MD",
+            newsletterJid: "0029Vb74Dlf4CrfoqpAEBC2T@newsletter",
+            newsletterName: "Tenebri",
             serverMessageId: -1,
           },
         },
@@ -70,8 +70,8 @@ async function stickerCommand(sock, chatId, message) {
           forwardingScore: 999,
           isForwarded: true,
           forwardedNewsletterMessageInfo: {
-            newsletterJid: "120363161513685998@newsletter",
-            newsletterName: "KnightBot MD",
+            newsletterJid: "0029Vb74Dlf4CrfoqpAEBC2T@newsletter",
+            newsletterName: "Tenebri",
             serverMessageId: -1,
           },
         },
@@ -174,7 +174,7 @@ async function stickerCommand(sock, chatId, message) {
     // Create metadata
     const json = {
       "sticker-pack-id": crypto.randomBytes(32).toString("hex"),
-      "sticker-pack-name": settings.packname || "KnightBot",
+      "sticker-pack-name": settings.packname || "Tenebri",
       emojis: ["🤖"],
     };
 
@@ -210,7 +210,7 @@ async function stickerCommand(sock, chatId, message) {
           await img2.load(smallWebp);
           const json2 = {
             "sticker-pack-id": crypto.randomBytes(32).toString("hex"),
-            "sticker-pack-name": settings.packname || "KnightBot",
+            "sticker-pack-name": settings.packname || "Tenebri",
             emojis: ["🤖"],
           };
           const exifAttr2 = Buffer.from([
@@ -253,7 +253,7 @@ async function stickerCommand(sock, chatId, message) {
         forwardingScore: 999,
         isForwarded: true,
         forwardedNewsletterMessageInfo: {
-          newsletterJid: "120363161513685998@newsletter",
+          newsletterJid: "0029Vb74Dlf4CrfoqpAEBC2T@newsletter",
           newsletterName: "KnightBot MD",
           serverMessageId: -1,
         },

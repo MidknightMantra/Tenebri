@@ -18,7 +18,7 @@ async function promoteCommand(sock, chatId, mentionedJids, message) {
   // If no user found through either method
   if (userToPromote.length === 0) {
     await sock.sendMessage(chatId, {
-      text: "Please mention the user or reply to their message to promote!",
+      text: "👁️ Mark the soul to be elevated — mention or reply to ascend them.",
     });
     return;
   }
@@ -37,18 +37,19 @@ async function promoteCommand(sock, chatId, mentionedJids, message) {
     const promoterJid = sock.user.id;
 
     const promotionMessage =
-      `*『 GROUP PROMOTION 』*\n\n` +
-      `👥 *Promoted User${userToPromote.length > 1 ? "s" : ""}:*\n` +
-      `${usernames.map((name) => `• ${name}`).join("\n")}\n\n` +
-      `👑 *Promoted By:* @${promoterJid.split("@")[0]}\n\n` +
-      `📅 *Date:* ${new Date().toLocaleString()}`;
+      `┏━━━『 ⚔️ 𝐀𝐒𝐂𝐄𝐍𝐒𝐈𝐎𝐍 𝐑𝐈𝐓𝐄 』━━━┓\n\n` +
+      `🌑 *Elevated Soul${userToPromote.length > 1 ? "s" : ""}:*\n` +
+      `${usernames.map((name) => `  ◈ ${name}`).join("\n")}\n\n` +
+      `👑 *Anointed By:* @${promoterJid.split("@")[0]}\n` +
+      `📅 *Time:* ${new Date().toLocaleString()}\n\n` +
+      `_The brave rise to guardian status..._`;
     await sock.sendMessage(chatId, {
       text: promotionMessage,
       mentions: [...userToPromote, promoterJid],
     });
   } catch (error) {
     console.error("Error in promote command:", error);
-    await sock.sendMessage(chatId, { text: "Failed to promote user(s)!" });
+    await sock.sendMessage(chatId, { text: "💀 The ascension ritual crumbles... The void resists." });
   }
 }
 

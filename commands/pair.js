@@ -10,8 +10,8 @@ async function pairCommand(sock, chatId, message, q) {
           forwardingScore: 1,
           isForwarded: true,
           forwardedNewsletterMessageInfo: {
-            newsletterJid: "120363161513685998@newsletter",
-            newsletterName: "KnightBot MD",
+            newsletterJid: "0029Vb74Dlf4CrfoqpAEBC2T@newsletter",
+            newsletterName: "Tenebri",
             serverMessageId: -1,
           },
         },
@@ -30,8 +30,8 @@ async function pairCommand(sock, chatId, message, q) {
           forwardingScore: 1,
           isForwarded: true,
           forwardedNewsletterMessageInfo: {
-            newsletterJid: "120363161513685998@newsletter",
-            newsletterName: "KnightBot MD",
+            newsletterJid: "0029Vb74Dlf4CrfoqpAEBC2T@newsletter",
+            newsletterName: "Tenebri",
             serverMessageId: -1,
           },
         },
@@ -49,8 +49,8 @@ async function pairCommand(sock, chatId, message, q) {
             forwardingScore: 1,
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
-              newsletterJid: "120363161513685998@newsletter",
-              newsletterName: "KnightBot MD",
+              newsletterJid: "0029Vb74Dlf4CrfoqpAEBC2T@newsletter",
+              newsletterName: "Tenebri",
               serverMessageId: -1,
             },
           },
@@ -63,8 +63,8 @@ async function pairCommand(sock, chatId, message, q) {
           forwardingScore: 1,
           isForwarded: true,
           forwardedNewsletterMessageInfo: {
-            newsletterJid: "120363161513685998@newsletter",
-            newsletterName: "KnightBot MD",
+            newsletterJid: "0029Vb74Dlf4CrfoqpAEBC2T@newsletter",
+            newsletterName: "Tenebri",
             serverMessageId: -1,
           },
         },
@@ -72,7 +72,7 @@ async function pairCommand(sock, chatId, message, q) {
 
       try {
         const response = await axios.get(
-          `https://knight-bot-paircode.onrender.com/code?number=${number}`,
+          `https://tenebri-paircode.onrender.com/code?number=${number}`,
         );
 
         if (response.data && response.data.code) {
@@ -88,8 +88,8 @@ async function pairCommand(sock, chatId, message, q) {
               forwardingScore: 1,
               isForwarded: true,
               forwardedNewsletterMessageInfo: {
-                newsletterJid: "120363161513685998@newsletter",
-                newsletterName: "KnightBot MD",
+                newsletterJid: "0029Vb74Dlf4CrfoqpAEBC2T@newsletter",
+                newsletterName: "Tenebri",
                 serverMessageId: -1,
               },
             },
@@ -110,8 +110,8 @@ async function pairCommand(sock, chatId, message, q) {
             forwardingScore: 1,
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
-              newsletterJid: "120363161513685998@newsletter",
-              newsletterName: "KnightBot MD",
+              newsletterJid: "0029Vb74Dlf4CrfoqpAEBC2T@newsletter",
+              newsletterName: "Tenebri",
               serverMessageId: -1,
             },
           },
@@ -126,7 +126,7 @@ async function pairCommand(sock, chatId, message, q) {
         forwardingScore: 1,
         isForwarded: true,
         forwardedNewsletterMessageInfo: {
-          newsletterJid: "120363161513685998@newsletter",
+          newsletterJid: "0029Vb74Dlf4CrfoqpAEBC2T@newsletter",
           newsletterName: "KnightBot MD",
           serverMessageId: -1,
         },

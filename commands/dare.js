@@ -14,13 +14,13 @@ async function dareCommand(sock, chatId, message) {
     const json = await res.json();
     const dareMessage = json.result;
 
-    // Send the dare message
-    await sock.sendMessage(chatId, { text: dareMessage }, { quoted: message });
+    // Send the dare message with gothic flair
+    await sock.sendMessage(chatId, { text: `⚔️ *The Void Challenges You, Brave Soul*\n\n${dareMessage}\n\n_Will you accept fate's gauntlet?_` }, { quoted: message });
   } catch (error) {
     console.error("Error in dare command:", error);
     await sock.sendMessage(
       chatId,
-      { text: "❌ Failed to get dare. Please try again later!" },
+      { text: "💀 The trial master remains in shadow... Call upon them again." },
       { quoted: message },
     );
   }

@@ -48,9 +48,11 @@ const WARN_COUNT = 3;
  */
 function getApiUrl(apiName, path = "", params = "") {
   const base = global.APIs[apiName];
-  const key = global.APIKeys[base];
   if (!base) throw new Error(`⚠️ Unknown API name: ${apiName}`);
-  return `${base}${path}${path.includes("?") ? "&" : "?"}apikey=${key}${params}`;
+  const key = global.APIKeys[base];
+  if (!key) throw new Error(`⚠️ No API key configured for: ${apiName}`);
+  const separator = params ? "&" : "";
+  return `${base}${path}${path.includes("?") ? "&" : "?"}apikey=${key}${separator}${params}`;
 }
 
 /* 💀 Exported Configuration Object */

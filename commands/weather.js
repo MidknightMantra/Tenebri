@@ -7,13 +7,13 @@ module.exports = async function (sock, chatId, message, city) {
       `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`,
     );
     const weather = response.data;
-    const weatherText = `Weather in ${weather.name}: ${weather.weather[0].description}. Temperature: ${weather.main.temp}°C.`;
+    const weatherText = `🌑 *The Skies Above ${weather.name}*\n\n🌫️ Conditions: ${weather.weather[0].description}\n🌡️ Temperature: ${weather.main.temp}°C\n💨 Wind: ${weather.wind.speed} m/s\n\n_~The elements reveal their secrets..._`;
     await sock.sendMessage(chatId, { text: weatherText }, { quoted: message });
   } catch (error) {
     console.error("Error fetching weather:", error);
     await sock.sendMessage(
       chatId,
-      { text: "Sorry, I could not fetch the weather right now." },
+      { text: "☁️ The atmospheric spirits elude Tenebri's grasp... Invoke again." },
       { quoted: message },
     );
   }

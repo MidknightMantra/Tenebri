@@ -1,5 +1,5 @@
 /**
- * Knight Bot - A WhatsApp Bot
+ * Tenebri - A WhatsApp Bot
  * Autoread Command - Automatically read all messages
  */
 
@@ -28,8 +28,8 @@ async function autoreadCommand(sock, chatId, message) {
           forwardingScore: 1,
           isForwarded: true,
           forwardedNewsletterMessageInfo: {
-            newsletterJid: "120363161513685998@newsletter",
-            newsletterName: "KnightBot MD",
+            newsletterJid: "0029Vb74Dlf4CrfoqpAEBC2T@newsletter",
+            newsletterName: "Tenebri",
             serverMessageId: -1,
           },
         },
@@ -60,8 +60,8 @@ async function autoreadCommand(sock, chatId, message) {
             forwardingScore: 1,
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
-              newsletterJid: "120363161513685998@newsletter",
-              newsletterName: "KnightBot MD",
+              newsletterJid: "0029Vb74Dlf4CrfoqpAEBC2T@newsletter",
+              newsletterName: "Tenebri",
               serverMessageId: -1,
             },
           },
@@ -83,8 +83,8 @@ async function autoreadCommand(sock, chatId, message) {
         forwardingScore: 1,
         isForwarded: true,
         forwardedNewsletterMessageInfo: {
-          newsletterJid: "120363161513685998@newsletter",
-          newsletterName: "KnightBot MD",
+          newsletterJid: "0029Vb74Dlf4CrfoqpAEBC2T@newsletter",
+          newsletterName: "Tenebri",
           serverMessageId: -1,
         },
       },
@@ -97,8 +97,8 @@ async function autoreadCommand(sock, chatId, message) {
         forwardingScore: 1,
         isForwarded: true,
         forwardedNewsletterMessageInfo: {
-          newsletterJid: "120363161513685998@newsletter",
-          newsletterName: "KnightBot MD",
+          newsletterJid: "0029Vb74Dlf4CrfoqpAEBC2T@newsletter",
+          newsletterName: "Tenebri",
           serverMessageId: -1,
         },
       },
@@ -162,8 +162,7 @@ function isBotMentionedInMessage(message, botNumber) {
     const botNames = [
       global.botname?.toLowerCase(),
       "bot",
-      "knight",
-      "knight bot",
+      "tenebri",
     ];
     const words = textContent.toLowerCase().split(/\s+/);
     if (botNames.some((name) => words.includes(name))) {

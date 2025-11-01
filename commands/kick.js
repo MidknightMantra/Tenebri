@@ -9,7 +9,7 @@ async function kickCommand(sock, chatId, senderId, mentionedJids, message) {
     if (!isBotAdmin) {
       await sock.sendMessage(
         chatId,
-        { text: "Please make the bot an admin first." },
+        { text: "🕯️ Tenebri requires guardian status to cast out the unworthy." },
         { quoted: message },
       );
       return;
@@ -18,7 +18,7 @@ async function kickCommand(sock, chatId, senderId, mentionedJids, message) {
     if (!isSenderAdmin) {
       await sock.sendMessage(
         chatId,
-        { text: "Only group admins can use the kick command." },
+        { text: "⚔️ Only realm guardians may wield this banishment rite." },
         { quoted: message },
       );
       return;
@@ -41,7 +41,7 @@ async function kickCommand(sock, chatId, senderId, mentionedJids, message) {
     await sock.sendMessage(
       chatId,
       {
-        text: "Please mention the user or reply to their message to kick!",
+        text: "👁️ Mark the soul to be cast into the void — mention or reply to their whisper.",
       },
       { quoted: message },
     );
@@ -98,7 +98,7 @@ async function kickCommand(sock, chatId, senderId, mentionedJids, message) {
     await sock.sendMessage(
       chatId,
       {
-        text: "I can't kick myself🤖",
+        text: "💀 Tenebri cannot be banished from the shadows... I am eternal.",
       },
       { quoted: message },
     );
@@ -116,13 +116,13 @@ async function kickCommand(sock, chatId, senderId, mentionedJids, message) {
     );
 
     await sock.sendMessage(chatId, {
-      text: `${usernames.join(", ")} has been kicked successfully!`,
+      text: `⚔️ ${usernames.join(", ")} has been cast into the void!\n\n_The shadows have spoken..._`,
       mentions: usersToKick,
     });
   } catch (error) {
     console.error("Error in kick command:", error);
     await sock.sendMessage(chatId, {
-      text: "Failed to kick user(s)!",
+      text: "💀 The banishment ritual faltered... The void resists.",
     });
   }
 }

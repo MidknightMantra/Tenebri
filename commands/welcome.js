@@ -85,7 +85,7 @@ async function handleJoinEvent(sock, id, participants) {
           hour12: true,
         });
 
-        finalMessage = `╭╼━≪•𝙽𝙴𝚆 𝙼𝙴𝙼𝙱𝙴𝚁•≫━╾╮\n┃𝚆𝙴𝙻𝙲𝙾𝙼𝙴: @${displayName} 👋\n┃Member count: #${groupMetadata.participants.length}\n┃𝚃𝙸𝙼𝙴: ${timeString}⏰\n╰━━━━━━━━━━━━━━━╯\n\n*@${displayName}* Welcome to *${groupName}*! 🎉\n*Group 𝙳𝙴𝚂𝙲𝚁𝙸𝙿𝚃𝙸𝙾𝙽*\n${groupDesc}\n\n> *ᴘᴏᴡᴇʀᴇᴅ ʙʏ Knight Bot*`;
+        finalMessage = `┏━━━『 🕯️ 𝐍𝐄𝐖 𝐒𝐎𝐔𝐋 𝐀𝐑𝐑𝐈𝐕𝐄𝐒 』━━━┓\n┃ 👁️ Welcome: @${displayName}\n┃ 🌑 Souls gathered: ${groupMetadata.participants.length}\n┃ ⏰ Time: ${timeString}\n┗━━━━━━━━━━━━━━━━━━━━━━━┛\n\n*@${displayName}* emerges from the shadows into *${groupName}*! ⚔️\n\n🕯️ *Realm Chronicle*\n${groupDesc}\n\n_~Guarded by Tenebri, brave sentinel of the void~_`;
       }
 
       // Try to send with image first (always try images)

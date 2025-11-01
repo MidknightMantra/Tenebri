@@ -103,7 +103,7 @@ async function convertBufferToStickerWebp(inputBuffer, isAnimated, cropSquare) {
 
   const json = {
     "sticker-pack-id": crypto.randomBytes(32).toString("hex"),
-    "sticker-pack-name": settings.packname || "KnightBot",
+    "sticker-pack-name": settings.packname || "Tenebri",
     emojis: ["📸"],
   };
   const exifAttr = Buffer.from([
@@ -137,7 +137,7 @@ async function convertBufferToStickerWebp(inputBuffer, isAnimated, cropSquare) {
         await img2.load(smallWebp);
         const json2 = {
           "sticker-pack-id": crypto.randomBytes(32).toString("hex"),
-          "sticker-pack-name": settings.packname || "KnightBot",
+          "sticker-pack-name": settings.packname || "Tenebri",
           emojis: ["📸"],
         };
         const exifAttr2 = Buffer.from([
@@ -362,7 +362,7 @@ async function forceMiniSticker(inputBuffer, isVideo, cropSquare) {
   await img.load(smallWebp);
   const json = {
     "sticker-pack-id": crypto.randomBytes(32).toString("hex"),
-    "sticker-pack-name": settings.packname || "KnightBot",
+    "sticker-pack-name": settings.packname || "Tenebri",
     emojis: ["📸"],
   };
   const exifAttr = Buffer.from([

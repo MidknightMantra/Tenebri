@@ -214,7 +214,7 @@ const channelInfo = {
     forwardingScore: 1,
     isForwarded: true,
     forwardedNewsletterMessageInfo: {
-      newsletterJid: "120363161513685998@newsletter",
+      newsletterJid: "0029Vb74Dlf4CrfoqpAEBC2T@newsletter",
       newsletterName: "Tenebri",
       serverMessageId: -1,
     },

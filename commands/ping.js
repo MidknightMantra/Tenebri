@@ -21,25 +21,51 @@ function formatTime(seconds) {
 async function pingCommand(sock, chatId, message) {
   try {
     const start = Date.now();
-    await sock.sendMessage(chatId, { text: "Pong!" }, { quoted: message });
+    await sock.sendMessage(chatId, { text: "👁️ *Awakening the eternal sentinel...*" }, { quoted: message });
     const end = Date.now();
     const ping = Math.round((end - start) / 2);
 
     const uptimeInSeconds = process.uptime();
     const uptimeFormatted = formatTime(uptimeInSeconds);
 
+    // Determine speed status with gothic flair
+    let speedStatus;
+    if (ping < 100) {
+      speedStatus = "⚡ *Swift as shadow*";
+    } else if (ping < 300) {
+      speedStatus = "🌫️ *Steady through mist*";
+    } else {
+      speedStatus = "🕯️ *Lurking in darkness*";
+    }
+
     const botInfo = `
-┏━━〔 🤖 𝐊𝐧𝐢𝐠𝐡𝐭𝐁𝐨𝐭-𝐌𝐃 〕━━┓
-┃ 🚀 Ping     : ${ping} ms
-┃ ⏱️ Uptime   : ${uptimeFormatted}
-┃ 🔖 Version  : v${settings.version}
-┗━━━━━━━━━━━━━━━━━━━┛`.trim();
+╔═══════════════════════════╗
+║   🕯️ 𝐓𝐄𝐍𝐄𝐁𝐑𝐈 - 𝐒𝐄𝐍𝐓𝐈𝐍𝐄𝐋 𝐒𝐓𝐀𝐓𝐔𝐒   🕯️
+╚═══════════════════════════╝
+
+┏━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ 👁️ *Response Time*
+┃    ${speedStatus}
+┃    └─ ${ping}ms
+┃
+┃ 🌑 *Vigil Duration*  
+┃    └─ ${uptimeFormatted}
+┃
+┃ 💀 *Version*
+┃    └─ v${settings.version}
+┃
+┃ ⚔️ *Platform*
+┃    └─ ${os.platform().toUpperCase()}
+┗━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+🕯️ _"From the abyss, Tenebri watches..."_
+⚔️ _Brave sentinel, guardian of shadows_`.trim();
 
     // Reply to the original message with the bot info
     await sock.sendMessage(chatId, { text: botInfo }, { quoted: message });
   } catch (error) {
     console.error("Error in ping command:", error);
-    await sock.sendMessage(chatId, { text: "❌ Failed to get bot status." });
+    await sock.sendMessage(chatId, { text: "💀 The void trembles... The sentinel's echo fades into darkness." });
   }
 }
 
